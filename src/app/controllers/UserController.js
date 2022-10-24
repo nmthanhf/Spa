@@ -26,6 +26,22 @@ class UserController {
             res.status(400).send(error)
         }
     }
+
+    async profile(req, res, next) {
+        res.send(req.user)
+    }
+
+    async logout(req, res, next) {
+        try {
+            req.user.tokens = req.user.tokens.filter((token) => {
+                return token.token != req.token
+            })
+            await req.user.save()
+            res.send()
+        } catch (error) {
+            res.status(500).send(error)
+        }
+    }
 }
 
 module.exports = new UserController
