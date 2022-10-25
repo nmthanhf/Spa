@@ -41,6 +41,17 @@ class UserController {
     async profile(req, res, next) {
         res.send(req.user)
     }
+
+    //Sửa thông tin
+    async edit(req, res, next) {
+        const _id = req.params.id
+        try {
+            await User.updateOne({ _id: _id}, req.body)
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
     //Đăng xuất
     async logout(req, res, next) {
         try {

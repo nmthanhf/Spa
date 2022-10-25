@@ -19,6 +19,8 @@ app.use(bp.urlencoded({ extended: true }))
 app.engine('handlebars', handlebars.engine({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 app.set('views', path.join(__dirname, 'resources', 'views'))
+// app.use(methodOverride('X-HTTP-Method-Override'))
+// app.use(methodOverride('_method'))
 route(app);
 app.listen(port, () => {
    console.log(`App listening on port ${port}`)
