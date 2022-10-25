@@ -20,8 +20,8 @@ class UserController {
     //Đăng nhập
     async login(req, res, next) {
         try {
-            const { email, password } = req.body
-            const user = await User.findOne({ email })
+            const { phoneNumber, password } = req.body
+            const user = await User.findOne({ phoneNumber })
             if (!user) {
                 throw new Error({ error: 'User not found' })
             }
