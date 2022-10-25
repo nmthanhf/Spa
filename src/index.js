@@ -1,7 +1,7 @@
 const express = require('express')
 const path = require('path')
 const morgan = require('morgan')
-const handlebars=require('express-handlebars')
+const handlebars = require('express-handlebars')
 const bp = require('body-parser')
 
 const app = express()
@@ -18,7 +18,7 @@ app.use(bp.json())
 app.use(bp.urlencoded({ extended: true }))
 app.engine('handlebars', handlebars.engine({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
-app.set('views', path.join(__dirname,'resources', 'views'))
+app.set('views', path.join(__dirname, 'resources', 'views'))
 route(app);
 app.listen(port, () => {
    console.log(`App listening on port ${port}`)

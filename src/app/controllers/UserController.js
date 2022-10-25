@@ -1,36 +1,47 @@
 const User = require('../models/User')
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 class UserController {
-
+    //Đăng ký
     async register(req, res, next) {
         try {
             const user = new User(req.body)
             await user.save()
-            const token = await user.generateAuthToken()
+            const token = jwt.sign({ _id: user._id }, process.env.JWT_KEY)
+            user.tokens = user.tokens.concat({ token })
+            await user.save()
             res.status(201).send({ user, token })
         } catch (error) {
-            res.status(400).send(error)
+            //console.log(error)
+            res.send(error)
         }
     }
-
+    //Đăng nhập
     async login(req, res, next) {
         try {
             const { email, password } = req.body
-            const user = await User.findByCredentials(email, password)
+            const user = await User.findOne({ email })
             if (!user) {
-                return res.status(401).send({ error: 'Login failed! Check authentication credentials' })
+                throw new Error({ error: 'User not found' })
             }
-            const token = await user.generateAuthToken()
+            const isPasswordMatch = await bcrypt.compare(password, user.password)
+            if (!isPasswordMatch) {
+                throw new Error({ error: 'Incorrect password' })
+            }
+            const token = jwt.sign({ _id: user._id }, process.env.JWT_KEY)
+            user.tokens = user.tokens.concat({ token })
+            await user.save()
             res.send({ user, token })
         } catch (error) {
-            res.status(400).send(error)
+            res.send(error)
         }
     }
-
+    //Xem thông tin
     async profile(req, res, next) {
         res.send(req.user)
     }
-
+    //Đăng xuất
     async logout(req, res, next) {
         try {
             req.user.tokens = req.user.tokens.filter((token) => {
@@ -39,7 +50,7 @@ class UserController {
             await req.user.save()
             res.send()
         } catch (error) {
-            res.status(500).send(error)
+            res.send(error)
         }
     }
 }
