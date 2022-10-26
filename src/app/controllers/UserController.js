@@ -39,9 +39,9 @@ class UserController {
     }
     //Xem thông tin
     async profile(req, res, next) {
-        try{
-        res.send(req.user)
-        } catch(error) {
+        try {
+            res.send(req.user)
+        } catch (error) {
             console.log(error)
         }
     }
@@ -50,7 +50,7 @@ class UserController {
     async edit(req, res, next) {
         const _id = req.params.id
         try {
-            await User.updateOne({ _id: _id}, req.body)
+            await User.updateOne({ _id: _id }, req.body)
             const user = await User.findOne(_id)
             res.send(user)
         } catch (error) {

@@ -4,7 +4,7 @@ const Employee = require('../models/Employee')
 //Xác nhận xem tài khoản đã đăng nhập hay chưa
 
 module.exports = {
-    isUser: async (req, res, next) =>{
+    isUser: async (req, res, next) => {
         try {
             const token = req.header('Authorization').replace('Bearer ', '')
             const data = jwt.verify(token, process.env.JWT_KEY)
@@ -26,7 +26,7 @@ module.exports = {
             //res.redirect('user/login')
         }
     },
-    isEmployee: async (req, res, next) =>{
+    isEmployee: async (req, res, next) => {
         try {
             const token = req.header('Authorization').replace('Bearer ', '')
             const data = jwt.verify(token, process.env.JWT_KEY)

@@ -40,19 +40,19 @@ class EmployeeController {
     }
     //Xem thông tin
     async profile(req, res, next) {
-        try{
-        res.send(req.employee)
-    } catch(error) {
-        console.log(error)
-    }
+        try {
+            res.send(req.employee)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     //Sửa thông tin
     async edit(req, res, next) {
         const _id = req.params.id
         try {
-            await Employee.updateOne({ _id: _id}, req.body)
-            const employee = await Employee.findById( _id )
+            await Employee.updateOne({ _id: _id }, req.body)
+            const employee = await Employee.findById(_id)
             res.send(employee)
         } catch (error) {
             res.send(error)

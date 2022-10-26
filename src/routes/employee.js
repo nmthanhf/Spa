@@ -9,7 +9,7 @@ router.post('/login', employeeController.login)
 //Xem thông tin tài khoản
 router.get('/profile', auth.isEmployee, employeeController.profile)
 // Sửa thông tin 
- router.patch('/:id/edit', auth.isEmployee, employeeController.edit)
+router.patch('/:id/edit', auth.isEmployee, employeeController.edit)
 //Đăng xuất
 router.post('/logout', auth.isEmployee, employeeController.logout)
 

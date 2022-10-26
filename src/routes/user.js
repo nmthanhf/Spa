@@ -9,7 +9,7 @@ router.post('/login', userController.login)
 //Xem thông tin tài khoản
 router.get('/profile', auth.isUser, userController.profile)
 // Sửa thông tin 
- router.patch('/:id/edit', auth.isUser, userController.edit)
+router.patch('/:id/edit', auth.isUser, userController.edit)
 //Đăng xuất
 router.post('/logout', auth.isUser, userController.logout)
 
