@@ -39,7 +39,11 @@ class UserController {
     }
     //Xem thông tin
     async profile(req, res, next) {
+        try{
         res.send(req.user)
+        } catch(error) {
+            console.log(error)
+        }
     }
 
     //Sửa thông tin
@@ -47,6 +51,8 @@ class UserController {
         const _id = req.params.id
         try {
             await User.updateOne({ _id: _id}, req.body)
+            const user = await User.findOne(_id)
+            res.send(user)
         } catch (error) {
             res.send(error)
         }
@@ -59,7 +65,7 @@ class UserController {
                 return token.token != req.token
             })
             await req.user.save()
-            res.send()
+            res.status(200).send()
         } catch (error) {
             res.send(error)
         }

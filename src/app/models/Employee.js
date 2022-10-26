@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs')
 
 //Tên, địa chỉ bắt buộc
 //sdt, email duy nhất
-const userSchema = mongoose.Schema({
+const employeeSchema = mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -31,13 +31,17 @@ const userSchema = mongoose.Schema({
         required: true,
         minLength: 7
     },
-    ROLE: {
-        type: String,
-        default: "user"
-    },
     address: {
         type: String,
         required: true,
+    },
+    role: {
+        type: String,
+        default: "employee"
+    },
+    salary: {
+        type: Number,
+        default: 10000000
     },
     tokens: [{
         token: {
@@ -49,14 +53,14 @@ const userSchema = mongoose.Schema({
     timestamps: true,
 })
 
-userSchema.pre('save', async function (next) {
-    const user = this
-    if (user.isModified('password')) {
-        user.password = await bcrypt.hash(user.password, 8)
+employeeSchema.pre('save', async function (next) {
+    const Employee = this
+    if (Employee.isModified('password')) {
+        Employee.password = await bcrypt.hash(Employee.password, 8)
     }
     next()
 })
 
-const User = mongoose.model('User', userSchema)
+const Employee = mongoose.model('Employee', employeeSchema)
 
-module.exports = User
+module.exports = Employee
