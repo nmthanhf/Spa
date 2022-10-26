@@ -53,7 +53,7 @@ class UserController {
             res.send(error)
         }
     }
-
+ 
     //Đăng xuất
     async logout(req, res, next) {
         try {

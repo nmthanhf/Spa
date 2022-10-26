@@ -45,5 +45,5 @@ module.exports = {
             console.log(error)
             //res.redirect('Employee/login')
         }
-    }
+    } 
 }

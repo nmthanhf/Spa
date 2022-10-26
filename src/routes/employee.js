@@ -14,3 +14,4 @@ router.patch('/:id/edit', auth.isEmployee, employeeController.edit)
 router.post('/logout', auth.isEmployee, employeeController.logout)
 
 module.exports = router
+ 
