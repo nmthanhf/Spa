@@ -39,11 +39,7 @@ class UserController {
     }
     //Xem thông tin
     async profile(req, res, next) {
-        try {
             res.send(req.user)
-        } catch (error) {
-            console.log(error)
-        }
     }
 
     //Sửa thông tin
@@ -65,7 +61,7 @@ class UserController {
                 return token.token != req.token
             })
             await req.user.save()
-            res.status(200).send()
+            res.redirect('/')
         } catch (error) {
             res.send(error)
         }

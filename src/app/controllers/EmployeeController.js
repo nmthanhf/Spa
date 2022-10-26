@@ -66,7 +66,7 @@ class EmployeeController {
                 return token.token != req.token
             })
             await req.employee.save()
-            res.send()
+            res.redirect('/')
         } catch (error) {
             res.send(error)
         }
