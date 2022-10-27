@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 class UserController {
-    //Đăng ký
+    //Đăng ký, nhận thông tin tài khoản và trả về user và token
     async register(req, res, next) {
         try {
             const user = new User(req.body)
@@ -17,7 +17,7 @@ class UserController {
             res.send(error)
         }
     }
-    //Đăng nhập
+    //Đăng nhập,  trả về user và token
     async login(req, res, next) {
         try {
             const { phoneNumber, password } = req.body
@@ -42,7 +42,7 @@ class UserController {
             res.send(req.user)
     }
 
-    //Sửa thông tin
+    //Sửa thông tin  nhận vào id người dùng 
     async edit(req, res, next) {
         const _id = req.params.id
         try {
