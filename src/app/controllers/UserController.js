@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 
 class UserController {
     //Đăng ký, nhận thông tin tài khoản và trả về user và token
+    //POST /user/register
     async register(req, res, next) {
         try {
             const user = new User(req.body)
@@ -18,6 +19,7 @@ class UserController {
         }
     }
     //Đăng nhập,  trả về user và token
+    //POST /user/login
     async login(req, res, next) {
         try {
             const { phoneNumber, password } = req.body
@@ -38,11 +40,13 @@ class UserController {
         }
     }
     //Xem thông tin
+    // GET user/profile
     async profile(req, res, next) {
             res.send(req.user)
     }
 
     //Sửa thông tin  nhận vào id người dùng 
+    //Patch /user/:id/edit
     async edit(req, res, next) {
         const _id = req.params.id
         try {
@@ -55,6 +59,7 @@ class UserController {
     }
  
     //Đăng xuất
+    //POST /user/logout
     async logout(req, res, next) {
         try {
             req.user.tokens = req.user.tokens.filter((token) => {

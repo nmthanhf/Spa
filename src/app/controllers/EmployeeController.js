@@ -11,7 +11,7 @@ class EmployeeController {
             const token = jwt.sign({ _id: employee._id }, process.env.JWT_KEY)
             employee.tokens = employee.tokens.concat({ token })
             await employee.save()
-            res.status(201).send({ employee: employee, token })
+            res.send({ employee: employee, token })
         } catch (error) {
             //console.log(error)
             res.send(error)
@@ -39,6 +39,7 @@ class EmployeeController {
         }
     }
     //Xem thông tin
+    //
     async profile(req, res, next) {
         try {
             res.send(req.employee)
