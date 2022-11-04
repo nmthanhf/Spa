@@ -111,6 +111,19 @@ class AppointmentController {
 
     //Xem thông tin chi tiết một lịch đã đặt
     //GET /appointment/view/detail/:id
+    // {
+    //     "_id": "6364f9849f80b499b4b2a21c",
+    //     "user_id": "635bf6e3a77f820646f73137",
+    //     "user_name": "Nguyễn Minh Thành",
+    //     "employee_id": "635bf8c5071adf98db0d644c",
+    //     "employee_name": "Nguyễn Thanh Hà",
+    //     "user_phoneNumber": "0000000001",
+    //     "startDate": "2022-11-06T08:40:00.000Z",
+    //     "endDate": "2022-11-06T10:40:00.000Z",
+    //     "createdAt": "2022-11-04T11:37:40.270Z",
+    //     "updatedAt": "2022-11-04T11:37:40.270Z",
+    //     "__v": 0
+    // }
     async viewDetail (req, res, next) {
         const _id = req.params.id
         console.log(_id)
@@ -148,7 +161,9 @@ class AppointmentController {
     //         "name" :"Nguyễn Thanh Hà"
     //     },
     //     "treatment": {
-    //         "_id": "635abc3b65e45368d7b00f05",
+    //         "id": "635abc3b65e45368d7b00f05",
+    //         "name":"Chăm sóc da mặt",
+    //         "price":"1000000",
     //         "time": "2"
     //     },
     //     "startTime": "09:30",
@@ -164,7 +179,10 @@ class AppointmentController {
     //         "user_phoneNumber": "0000000001",
     //         "startDate": "2022-12-10T02:30:00.000Z",
     //         "endDate": "2022-12-10T04:30:00.000Z",
-    //         "_id": "6364d6682e2f89be4f1bd16d"
+    //         "treatment_name": "Chăm sóc da mặt",
+    //         "treatment_price": 1000000,
+    //         "check": false,
+    //         "_id": "63654178d8f9b1dc7cbe51a0"
     //     }
     // }
     async userBooking(req, res, next) {
@@ -175,6 +193,8 @@ class AppointmentController {
             const employee_id = req.body.employee._id
             const employee_name = req.body.employee.name
             const time = parseInt(req.body.treatment.time)
+            const treatment_price = req.body.treatment.price
+            const treatment_name = req.body.treatment.name
             const startTime = String(req.body.startTime)
             const startDate = new Date(req.body.startDate + "T" + startTime)
             const hours = parseInt(startTime.slice(0, 2))
@@ -191,6 +211,7 @@ class AppointmentController {
             const appointment = new Appointment({
                 user_id: user_id, user_name: user_name, user_phoneNumber: user_phoneNumber,
                 employee_id: employee_id, employee_name: employee_name,
+                treatment_name: treatment_name, treatment_price: treatment_price,
                 startDate: startDate, endDate: endDate
             })
             appointment.save()

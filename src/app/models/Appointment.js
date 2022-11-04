@@ -32,6 +32,18 @@ const appointmentSchema = mongoose.Schema({
         type: Date,
         required: true,
     },
+    treatment_name: {
+        type: String,
+        required: true
+    },
+    treatment_price: {
+        type: Number,
+        required: true
+    },
+    check: {
+        type:Boolean,
+        default: false
+    }
 }, {
     timestamps: true,
 })
