@@ -25,11 +25,11 @@ class UserController {
             const { phoneNumber, password } = req.body
             const user = await User.findOne({ phoneNumber })
             if (!user) {
-                throw new Error({ error: 'User not found' })
+                res.status(400).json({ error: 'User not found' })
             }
             const isPasswordMatch = await bcrypt.compare(password, user.password)
             if (!isPasswordMatch) {
-                throw new Error({ error: 'Incorrect password' })
+                res.status(400).json({ error: 'Incorrect password' })
             }
             const token = jwt.sign({ _id: user._id }, process.env.JWT_KEY)
             user.tokens = user.tokens.concat({ token })

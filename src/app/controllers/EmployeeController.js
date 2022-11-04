@@ -23,11 +23,11 @@ class EmployeeController {
             const { phoneNumber, password } = req.body
             const employee = await Employee.findOne({ phoneNumber })
             if (!employee) {
-                throw new Error({ error: 'Employee not found' })
+                return res.status(400).json({ error: 'Employee not found' })
             }
             const isPasswordMatch = await bcrypt.compare(password, employee.password)
             if (!isPasswordMatch) {
-                throw new Error({ error: 'Incorrect password' })
+                return res.status(400).json({ error: 'Incorrect password' })
             }
             const token = jwt.sign({ _id: employee._id }, process.env.JWT_KEY)
             employee.tokens = employee.tokens.concat({ token })
