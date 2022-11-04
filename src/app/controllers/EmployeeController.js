@@ -13,8 +13,7 @@ class EmployeeController {
             await employee.save()
             res.send({ employee: employee, token })
         } catch (error) {
-            //console.log(error)
-            res.send(error)
+            res.json({error: error})
         }
     }
     //Đăng nhập
@@ -34,8 +33,7 @@ class EmployeeController {
             await employee.save()
             res.send({ employee: employee, token })
         } catch (error) {
-            console.log(error)
-            res.send(error)
+            res.json({error: error})
         }
     }
     //Xem thông tin
@@ -44,7 +42,7 @@ class EmployeeController {
         try {
             res.send(req.employee)
         } catch (error) {
-            console.log(error)
+            res.json({error: error})
         }
     }
 
@@ -56,7 +54,7 @@ class EmployeeController {
             const employee = await Employee.findById(_id)
             res.send(employee)
         } catch (error) {
-            res.send(error)
+            res.json({error: error})
         }
     }
 
@@ -69,7 +67,7 @@ class EmployeeController {
             await req.employee.save()
             res.redirect('/')
         } catch (error) {
-            res.send(error)
+            res.json({error: error})
         }
     }
 }

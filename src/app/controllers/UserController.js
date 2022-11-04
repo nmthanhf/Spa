@@ -14,8 +14,7 @@ class UserController {
             await user.save()
             res.status(201).send({ user, token })
         } catch (error) {
-            //console.log(error)
-            res.send(error)
+            res.json({error: error})
         }
     }
     //Đăng nhập,  trả về user và token
@@ -36,7 +35,7 @@ class UserController {
             await user.save()
             res.send({ user, token })
         } catch (error) {
-            res.send(error)
+            res.json({error: error})
         }
     }
     //Xem thông tin
@@ -54,7 +53,7 @@ class UserController {
             const user = await User.findOne(_id)
             res.send(user)
         } catch (error) {
-            res.send(error)
+            res.json({error: error})
         }
     }
  
@@ -68,7 +67,7 @@ class UserController {
             await req.user.save()
             res.redirect('/')
         } catch (error) {
-            res.send(error)
+            res.json({error: error})
         }
     }
 }

@@ -143,7 +143,7 @@ class AppointmentController {
             appointment.save()
             res.send({ appointment })
         } catch (error) {
-            console.log(error)
+            res.status(400).json({error: 'The information entered is incorrect'})
         }
     }
 }
