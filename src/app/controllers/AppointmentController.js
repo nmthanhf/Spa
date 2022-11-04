@@ -133,7 +133,7 @@ class AppointmentController {
                 count = await Appointment.find({ employee_id: employee_id, endDate: { $gte: startDate, $lt: endDate } }).count()
             }
             if (count != 0) {
-                return res.status(400).json({ error: 'Staff at this time have an appointment, please choose another time or another employee'})
+                return res.status(400).json({ error: 'Nhân viên đang bận trong khoảng thời gian này, mời đặt lịch vào thời gian khác hoặc với nhân viên khác' })
             }
             const appointment = new Appointment({
                 user_id: user_id, user_name: user_name, user_phoneNumber: user_phoneNumber,
@@ -143,7 +143,7 @@ class AppointmentController {
             appointment.save()
             res.send({ appointment })
         } catch (error) {
-            res.status(400).json({error: 'The information entered is incorrect'})
+            res.status(400).json({ error: 'Thông tin nhập vào không chính xác' })
         }
     }
 }

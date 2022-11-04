@@ -14,4 +14,3 @@ router.patch('/:id/edit', auth.isUser, userController.edit)
 router.post('/logout', auth.isUser, userController.logout)
 
 module.exports = router
- 

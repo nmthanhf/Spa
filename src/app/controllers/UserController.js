@@ -14,7 +14,7 @@ class UserController {
             await user.save()
             res.status(201).send({ user, token })
         } catch (error) {
-            res.json({error: error})
+            res.json({ error: 'Thông tin đã nhập không chính xác' })
         }
     }
     //Đăng nhập,  trả về user và token
@@ -24,24 +24,24 @@ class UserController {
             const { phoneNumber, password } = req.body
             const user = await User.findOne({ phoneNumber })
             if (!user) {
-                res.status(400).json({ error: 'User not found' })
+                res.status(400).json({ error: 'Không tìm thấy người dùng' })
             }
             const isPasswordMatch = await bcrypt.compare(password, user.password)
             if (!isPasswordMatch) {
-                res.status(400).json({ error: 'Incorrect password' })
+                res.status(400).json({ error: 'Mật khẩu không chính xác' })
             }
             const token = jwt.sign({ _id: user._id }, process.env.JWT_KEY)
             user.tokens = user.tokens.concat({ token })
             await user.save()
             res.send({ user, token })
         } catch (error) {
-            res.json({error: error})
+            res.json({ error: 'Thông tin đã nhập không chính xác' })
         }
     }
     //Xem thông tin
     // GET user/profile
     async profile(req, res, next) {
-            res.send(req.user)
+        res.send(req.user)
     }
 
     //Sửa thông tin  nhận vào id người dùng 
@@ -53,10 +53,10 @@ class UserController {
             const user = await User.findOne(_id)
             res.send(user)
         } catch (error) {
-            res.json({error: error})
+            res.json({ error: 'Cập nhật không thành công thông tin người dùng' })
         }
     }
- 
+
     //Đăng xuất
     //POST /user/logout
     async logout(req, res, next) {
@@ -67,7 +67,7 @@ class UserController {
             await req.user.save()
             res.redirect('/')
         } catch (error) {
-            res.json({error: error})
+            res.json({ error: 'Lỗi đăng xuất' })
         }
     }
 }

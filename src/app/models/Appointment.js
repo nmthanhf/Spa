@@ -25,25 +25,17 @@ const appointmentSchema = mongoose.Schema({
         required: true,
     },
     startDate: {
-        type:Date,
+        type: Date,
         required: true,
     },
     endDate: {
-        type:Date,
+        type: Date,
         required: true,
     },
-    // startTime: {
-    //     type:String,
-    //     required: true,
-    // },
-    // endtTime: {
-    //     type:String,
-    //     required: true,
-    // }
 }, {
     timestamps: true,
 })
- 
+
 const Appointment = mongoose.model('Appointment', appointmentSchema)
- 
+
 module.exports = Appointment

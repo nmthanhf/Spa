@@ -18,12 +18,10 @@ module.exports = {
                 req.token = token
                 next()
             } catch (error) {
-                // res.send(error)
                 res.status(401).send({ error: 'Not authorized to access this resource' })
             }
         } catch (error) {
-            console.log(error)
-            //res.redirect('user/login')
+            res.redirect('user/login')
         }
     },
     isEmployee: async (req, res, next) => {
@@ -42,8 +40,7 @@ module.exports = {
                 res.status(401).send({ error: 'Not authorized to access this resource' })
             }
         } catch (error) {
-            console.log(error)
-            //res.redirect('Employee/login')
+            res.redirect('Employee/login')
         }
-    } 
+    }
 }

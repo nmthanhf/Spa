@@ -31,10 +31,6 @@ const userSchema = mongoose.Schema({
         required: true,
         minLength: 7
     },
-    ROLE: {
-        type: String,
-        default: "user"
-    },
     address: {
         type: String,
         required: true,
@@ -56,7 +52,7 @@ userSchema.pre('save', async function (next) {
     }
     next()
 })
- 
+
 const User = mongoose.model('User', userSchema)
- 
+
 module.exports = User

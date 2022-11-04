@@ -24,7 +24,7 @@ const treatmentSchema = mongoose.Schema({
 }, {
     timestamps: true,
 })
- 
+
 const Treatment = mongoose.model('Treatment', treatmentSchema)
- 
+
 module.exports = Treatment
