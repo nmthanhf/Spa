@@ -45,7 +45,7 @@ class AppointmentController {
     }
     //Đưa ra lịch làm việc của một nhân viên
     //Vào
-    //POST /appointment/userbooking/6364d6682e2f89be4f1bd16d
+    //POST /appointment/show/6364d6682e2f89be4f1bd16d
     //Ra:
     // {
     //     "appointments": [
@@ -82,6 +82,59 @@ class AppointmentController {
         const appointments = await Appointment.find({ employee_id: employee_id, "endDate": { $gte: (new Date().getTime() - 1000 * 3600 * 24) } })
         res.send({ appointments })
     }
+
+    //Xem tất cả đặt lịch của một người dùng
+    //Vào: GET /appointment/view
+    //Ra:
+    // {
+    //     "appointments": [
+    //         {
+    //             "_id": "6364d6682e2f89be4f1bd16d",
+    //             "user_id": "635bf6e3a77f820646f73137",
+    //             "user_name": "Nguyễn Minh Thành",
+    //             "employee_id": "635bf8c5071adf98db0d644c",
+    //             "employee_name": "Nguyễn Thanh Hà",
+    //             "user_phoneNumber": "0000000001",
+    //             "startDate": "2022-12-10T02:30:00.000Z",
+    //             "endDate": "2022-12-10T04:30:00.000Z",
+    //             "createdAt": "2022-11-04T09:07:52.608Z",
+    //             "updatedAt": "2022-11-04T09:07:52.608Z",
+    //             "__v": 0
+    //         }
+
+    //     ]
+    // }
+    async view(req, res, next) {
+        const appointments = await Appointment.find({ user_id: req.user._id, "endDate": { $gte: (new Date().getTime() - 1000 * 3600 * 24) } })
+        res.send({ appointments })
+    }
+
+    //Xem thông tin chi tiết một lịch đã đặt
+    //GET /appointment/view/detail/:id
+    async viewDetail (req, res, next) {
+        const _id = req.params.id
+        console.log(_id)
+        try {
+            const appointment = await Appointment.findById(_id)
+            res.send(appointment)
+        } catch (error) {
+            res.json({error: 'Không tìm thấy đặt lịch'})
+        }
+    }
+
+    //Sửa thông tin đặt lịch
+    // PATCH /appointment/:id/edit
+    async edit(req, res, next) {
+        const _id = req.params.id
+        try {
+            await Appointment.updateOne({ _id: _id }, req.body)
+            const appointment = await Appointment.findById(_id)
+            res.send(appointment)
+        } catch (error) {
+            res.json({ error: 'Cập nhật thông tin lịch hẹn không thành công' })
+        }
+    }
+
     //Đặt lịch POST /appointment/userbooking
     //Vào:
     // {
