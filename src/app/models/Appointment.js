@@ -28,20 +28,20 @@ const appointmentSchema = mongoose.Schema({
         type:Date,
         required: true,
     },
-    startTime: {
-        type:String,
+    endDate: {
+        type:Date,
         required: true,
     },
-    endtTime: {
-        type:String,
-        required: true,
-    }
+    // startTime: {
+    //     type:String,
+    //     required: true,
+    // },
+    // endtTime: {
+    //     type:String,
+    //     required: true,
+    // }
 }, {
     timestamps: true,
-})
-appointmentSchema.pre('save', async function (next) {
-    const Appointment = this
-    next()
 })
  
 const Appointment = mongoose.model('Appointment', appointmentSchema)
