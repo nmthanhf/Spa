@@ -70,6 +70,16 @@ class UserController {
             res.json({ error: 'Lỗi đăng xuất' })
         }
     }
+
+    async showAll(req, res, next) {
+        const users = await User.find({}, 'id name')
+        res.send({ users })
+    }
+
+    async show(req, res, next) {
+        const user = User.find({ phoneNumber: req.params.phoneNumber })
+        res.send({ user })
+    }
 }
 
 module.exports = new UserController

@@ -12,5 +12,6 @@ router.get('/profile', auth.isEmployee, employeeController.profile)
 router.patch('/:id/edit', auth.isEmployee, employeeController.edit)
 //Đăng xuất
 router.post('/logout', auth.isEmployee, employeeController.logout)
-
+//Làm mới tiền hoa hồng hàng tháng, đặt lại giá trị là 0
+router.post('/refeshCommission', auth.isAdmin, employeeController.refeshCommission)
 module.exports = router

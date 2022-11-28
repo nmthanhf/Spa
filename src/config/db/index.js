@@ -8,5 +8,5 @@ async function connect() {
         console.log('db cn failure')
     }
 }
- 
+
 module.exports = { connect }

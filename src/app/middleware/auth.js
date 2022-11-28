@@ -18,7 +18,7 @@ module.exports = {
                 req.token = token
                 next()
             } catch (error) {
-                res.status(401).send({ error: 'Not authorized to access this resource' })
+                res.status(401).send({ error: 'Bạn không được phép truy cập vào trang này' })
             }
         } catch (error) {
             res.redirect('user/login')
@@ -37,7 +37,26 @@ module.exports = {
                 req.token = token
                 next()
             } catch (error) {
-                res.status(401).send({ error: 'Not authorized to access this resource' })
+                res.status(401).send({ error: 'Bạn không được phép truy cập vào trang này' })
+            }
+        } catch (error) {
+            res.redirect('Employee/login')
+        }
+    },
+    isAdmin: async (req, res, next) => {
+        try {
+            const token = req.header('Authorization').replace('Bearer ', '')
+            const data = jwt.verify(token, process.env.JWT_KEY)
+            try {
+                const employee = await Employee.findOne({ _id: data._id, 'tokens.token': token })
+                if (!employee || employee.role.localeCompare("admin") != 0) {
+                    throw new Error()
+                }
+                req.employee = employee
+                req.token = token
+                next()
+            } catch (error) {
+                res.status(401).send({ error: 'Bạn không được phép truy cập vào trang này' })
             }
         } catch (error) {
             res.redirect('Employee/login')

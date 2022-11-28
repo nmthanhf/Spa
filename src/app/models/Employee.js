@@ -43,6 +43,10 @@ const employeeSchema = mongoose.Schema({
         type: Number,
         default: 10000000
     },
+    payroll: {
+        type: Number,
+        default: 0
+    },
     tokens: [{
         token: {
             type: String,

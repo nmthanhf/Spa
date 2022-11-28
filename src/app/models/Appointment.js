@@ -40,8 +40,12 @@ const appointmentSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    check: {
-        type:Boolean,
+    paid: {
+        type: Boolean,
+        default: false
+    },
+    done: {
+        type: Boolean,
         default: false
     }
 }, {

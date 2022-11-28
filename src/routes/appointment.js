@@ -41,4 +41,12 @@ router.get('employee/view/detail/:id', auth.isEmployee, appointmentController.em
 //Chỉnh sửa lịch đã đặt theo id appointment
 router.patch('/:id/employeeEdit', auth.isEmployee, appointmentController.employeeEdit)
 
+//Xoá một lich đã đặt
+router.delete('/:id/delete', auth.isEmployee, appointmentController.delete)
+
+//Nhân viên đặt lịch cho khách bằng số điện thoại
+router.post('/employeebooking', auth.isEmployee, appointmentController.employeeBooking)
+
+//Đánh dấu hoàn thành một lịch hẹn
+router.post('/:id/done', auth.isEmployee, appointmentController.done)
 module.exports = router

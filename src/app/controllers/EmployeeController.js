@@ -39,7 +39,7 @@ class EmployeeController {
     //Xem thông tin
     //
     async profile(req, res, next) {
-            res.send(req.employee)
+        res.send(req.employee)
     }
 
     //Sửa thông tin
@@ -66,6 +66,12 @@ class EmployeeController {
             res.json({ error: 'Lỗi đăng xuất' })
         }
     }
+
+    //Làm mới tiền hoa hồng của nhân nhân viên hàng tháng
+    async refeshCommission(req, res, next) {
+        await Employee.updateMany({}, { $set: { payroll: '0' } });
+    }
+
 }
 
 module.exports = new EmployeeController

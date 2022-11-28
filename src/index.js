@@ -11,7 +11,7 @@ const db = require('./config/db')
 
 db.connect()
 app.use(morgan('combined'))
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'files', 'public')))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(bp.json())
@@ -19,6 +19,7 @@ app.use(bp.urlencoded({ extended: true }))
 app.engine('handlebars', handlebars.engine({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 app.set('views', path.join(__dirname, 'resources', 'views'))
+app.use('/files', express.static("files"));
 // app.use(methodOverride('X-HTTP-Method-Override'))
 // app.use(methodOverride('_method'))
 route(app);
