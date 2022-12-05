@@ -1,25 +1,88 @@
 const mongoose = require('mongoose')
 
 const treatmentSchema = mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
     name: {
         type: String,
         required: true
     },
-    des: {
-        type: String,
-        required: true
+    oldPrice: {
+        type: Number
     },
-    img: {
-        type: String,
-        required: true
+    newPrice: {
+        type: Number
     },
-    price: {
-        type: Number,
-        required: true
+    mainImage: {
+        _id: {
+            type: mongoose.Schema.Types.ObjectId
+        },
+        src: {
+            type: String
+        }
     },
-    time: {
-        type: Number,
-        required: true
+    extraImage1: {
+        _id: {
+            type: String
+        },
+        src: {
+            type: String
+        }
+    },
+    extraImage2: {
+        _id: {
+            type: String
+        },
+        src: {
+            type: String
+        }
+    },
+    extraImage3: {
+        _id: {
+            type: String
+        },
+        src: {
+            type: String
+        }
+    },
+    view: {
+        type: Number
+    },
+    amount: {
+        type:Number
+    },
+    rating: {
+        type: Number
+    },
+    category: {
+        type: String
+    },
+    status: {
+        type: Array
+    },
+    tags: {
+        type: Array
+    },
+    duration: {
+        type: Number
+    },
+    ingredient: {
+        Array: {
+            name: String,
+            type: String,
+            amount : Number
+        }
+    },
+    startDate: {
+        type: String
+    },
+    bounus: {
+        type:Object
+    },
+    brand: {
+        type: String
+    },
+    description: {
+        type: String
     }
 }, {
     timestamps: true,

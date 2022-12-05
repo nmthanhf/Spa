@@ -1,14 +1,12 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
-
+const sendMail = require('../config/nodemailer')
 //Tên, địa chỉ bắt buộc
 //sdt, email duy nhất
 const userSchema = mongoose.Schema({
     name: {
         type: String,
-        required: true,
-        trim: true
     },
     email: {
         type: String,
@@ -22,18 +20,32 @@ const userSchema = mongoose.Schema({
         }
     },
     phoneNumber: {
-        type: String,
-        required: true,
-        unique: true
+        type: String
     },
     password: {
-        type: String,
-        required: true,
-        minLength: 7
+        type: String
     },
     address: {
+        type: String
+    },
+    role: {
         type: String,
-        required: true,
+        default: "user"
+    },
+    salary: {
+        type: Number,
+        default: 0
+    },
+    payroll: {
+        type: Number,
+        default: 0
+    },
+    isVerify: {
+        type: Boolean,
+        default: false
+    },
+    confirmationCode: {
+        type: Number
     },
     tokens: [{
         token: {

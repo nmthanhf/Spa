@@ -1,25 +1,58 @@
-const Appointment = require('../models/Appointment');
-const Employee = require('../models/Employee')
+
 const Product = require('../models/Product')
 const Treatment = require('../models/Treatment')
+const mongoose = require('mongoose')
+const fs = require('fs')
+const { Buffer } = require('buffer')
 class AdminController {
-    //Làm mới tiền hoa hồng của nhân nhân viên hàng tháng
-    async refeshCommission(req, res, next) {
-        await Employee.updateMany({}, { $set: { payroll: '0' } });
-        res.sendStatus(200)
-    }
 
     async createProduct(req, res, next) {
         try {
-            const name = req.body.name
-            const des = req.body.des
-            const img = req.file.path
-            const quantity = req.body.quantity
-            const price = req.body.price
-            const product = new Product({ name: name, des: des, img: img, quantity: quantity, price: price })
+            //console.log(req.files)
+            let mainImagesrc, extraImage1src, extraImage2src, extraImage3src
+            for (var i = 0; i < req.files.length; i++) {
+                const bitmap = fs.readFileSync(req.files[i].path)
+                var src = 'data:' + req.files[i].mimetype + ";base64,"
+                src += new Buffer(bitmap).toString('base64')
+
+                if (i == 0) {
+                    mainImagesrc = src;
+                } else if (i == 1) {
+                    extraImage1src = src;
+                } else if (i == 2) {
+                    extraImage2src = src;
+                } else if (i == 3) {
+                    extraImage3src = src;
+                }
+            }
+            console.log(mainImagesrc)
+            //const _id = new mongoose.Types.ObjectId()
+            const product = new Product({
+                _id: new mongoose.Types.ObjectId(),
+                name: req.body.name,
+                oldPrice: req.body.oldPrice,
+                newPrice: req.body.newPrice,
+                view: req.body.view,
+                color: req.body.color,
+                amount: req.body.mount,
+                rating: req.body.rating,
+                category: req.body.category,
+                status: req.body.status,
+                tags: req.body.tags,
+                startDate: req.body.startDate,
+                properties: req.body.properties,
+                productCode: req.body.productCode,
+                description: req.body.description,
+                mainImage: { src: mainImagesrc },
+                extraImage1: { id: new mongoose.Types.ObjectId(),src: extraImage1src },
+                extraImage2: {id: new mongoose.Types.ObjectId(),src: extraImage2src},
+                extraImage3: {id: new mongoose.Types.ObjectId(),src: extraImage3src},
+            }
+            )
             product.save()
             res.send({ product })
         } catch (error) {
+            console.log(error)
             res.status(500).json({
                 error: 'Tạo sản phẩm mới không thành công'
             })
@@ -35,17 +68,52 @@ class AdminController {
 
     async createTreatment(req, res, next) {
         try {
-            const name = req.body.name
-            const des = req.body.des
-            const img = req.file.path
-            const time = req.body.time
-            const price = req.body.price
-            const treatment = new Treatment({ name: name, des: des, img: img, time: time, price: price })
+            //console.log(req.files)
+            let mainImagesrc, extraImage1src ="", extraImage2src="", extraImage3src=""
+            for (var i = 0; i < req.files.length; i++) {
+                const bitmap = fs.readFileSync(req.files[i].path)
+                var src = 'data:' + req.files[i].mimetype + ";base64,"
+                src += new Buffer(bitmap).toString('base64')
+                src += ""
+                if (i == 0) {
+                    mainImagesrc = src;
+                } else if (i == 1) {
+                    extraImage1src = src;
+                } else if (i == 2) {
+                    extraImage2src = src;
+                } else if (i == 3) {
+                    extraImage3src = src;
+                }
+            }
+            const treatment = new Treatment({
+                _id: new mongoose.Types.ObjectId(),
+                name: req.body.name,
+                oldPrice: req.body.oldPrice,
+                newPrice: req.body.newPrice,
+                view: req.body.view,
+                amount: req.body.mount,
+                rating: req.body.rating,
+                category: req.body.category,
+                status: req.body.status,
+                tags: req.body.tags,
+                duration: req.body.duration,
+                ingredient: req.body.ingredient,
+                startDate: req.body.startDate,
+                properties: req.body.properties,
+                bonus: req.body.bonus,
+                branch: req.body.branch,
+                description: req.body.description,
+                mainImage: { src: mainImagesrc },
+                extraImage1: { id: new mongoose.Types.ObjectId(),src: extraImage1src },
+                extraImage2: {id: new mongoose.Types.ObjectId(),src: extraImage2src},
+                extraImage3: {id: new mongoose.Types.ObjectId(),src: extraImage3src},
+            }
+            )
             treatment.save()
             res.send({ treatment })
         } catch (error) {
             res.status(500).json({
-                error: 'Tạo sản phẩm mới không thành công'
+                error: 'Tạo liệu trình mới không thành công'
             })
         }
     }

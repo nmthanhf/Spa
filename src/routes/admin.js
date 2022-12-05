@@ -1,16 +1,10 @@
 const express = require('express');
-const AdminController = require('../app/controllers/AdminController');
+const multer = require('../app/config/multe')
+const AdminController = require('../app/controllers/AdminController')
+const auth = require ('../app/middleware/auth')
 const router = express.Router()
-const auth = require('../app/middleware/auth')
-// ..../admin/..
-//Làm mới tiền hoa hồng hàng tháng, đặt lại giá trị là 0
-router.post('/refeshCommission', auth.isAdmin, AdminController.refeshCommission)
 
+router.post('/addProduct', auth.isAdmin ,multer.upload.array('files', 4), AdminController.createProduct)
+router.post('/addTreatment',  auth.isAdmin, multer.upload.array('files', 4), AdminController.createTreatment)
 
-//Đưa ra danh sách đặt lịch
-// Đã hoàn thành: done = true
-// Đã thanh toán paid = true
-router.post('/appointment/:done&:paid', auth.isAdmin, AdminController.viewAppointment)
-
-router.post('/payroll', auth.isAdmin, AdminController.viewPayroll)
 module.exports = router

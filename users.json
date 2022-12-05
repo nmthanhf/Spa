@@ -1,0 +1,110 @@
+[{
+  "_id": {
+    "$oid": "638c81e66ceacde1d8bc35ac"
+  },
+  "email": "thanhf315@gmail.com",
+  "phoneNumber": "0000000001",
+  "password": "$2a$08$PWJyjlDkipxkGNXhWoi2v.7/0iXkNRgWIJrfCrNgBzwPbPmXhSA6S",
+  "role": "user",
+  "salary": 0,
+  "payroll": 0,
+  "isVerify": true,
+  "tokens": [
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzhjODFlNjZjZWFjZGUxZDhiYzM1YWMiLCJpYXQiOjE2NzAxNTI2Nzh9.PTzS5Lkrh6wNCm61oMQMl3VZZsYQgOC6OlCC3AZLuLc",
+      "_id": {
+        "$oid": "638c81e66ceacde1d8bc35ae"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670152678934"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670157076827"
+    }
+  },
+  "__v": 3,
+  "confirmationCode": 673776,
+  "name": "Nguyễn Thị Mai"
+},{
+  "_id": {
+    "$oid": "638c8bef8f6daaa0c049c57c"
+  },
+  "name": "Nguyễn Thành",
+  "email": "thanhf315@outlook.com",
+  "phoneNumber": "0000000002",
+  "password": "$2a$08$FogvlbZbGh4tqPeLLq7cMOK.hLESvuUm2XjJlMzODObAtnrjOZDsy",
+  "address": "Thanh Hóa",
+  "role": "user",
+  "salary": 0,
+  "payroll": 0,
+  "isVerify": true,
+  "tokens": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670155247499"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670155818467"
+    }
+  },
+  "__v": 3,
+  "confirmationCode": 666838
+},{
+  "_id": {
+    "$oid": "638e1f3215b91fc0e4b03696"
+  },
+  "name": "Nguyễn Thành",
+  "email": "admin@admin.com",
+  "phoneNumber": "0000000002",
+  "password": "$2a$08$FogvlbZbGh4tqPeLLq7cMOK.hLESvuUm2XjJlMzODObAtnrjOZDsy",
+  "address": "Thanh Hóa",
+  "role": "admin",
+  "salary": 0,
+  "payroll": 0,
+  "isVerify": true,
+  "tokens": [
+    {
+      "_id": {
+        "$oid": "638c8bef8f6daaa0c049c57e"
+      },
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzhjOGJlZjhmNmRhYWEwYzA0OWM1N2MiLCJpYXQiOjE2NzAxNTU0NjF9.nqRTfWqUY6NAr4Y-TUk8KYA81byGWZhhoqfSOM9Vs6Q"
+    },
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzhjOGJlZjhmNmRhYWEwYzA0OWM1N2MiLCJpYXQiOjE2NzAxNTUyOTl9.m6zuUOMdV57Y0Z678Ditmv9pSZKXdvWJqtc7SIBKojc",
+      "_id": {
+        "$oid": "638c8c238f6daaa0c049c582"
+      }
+    },
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzhjOGJlZjhmNmRhYWEwYzA0OWM1N2MiLCJpYXQiOjE2NzAxNTU0NjF9.nqRTfWqUY6NAr4Y-TUk8KYA81byGWZhhoqfSOM9Vs6Q",
+      "_id": {
+        "$oid": "638c8cc5acf67b2e5e50c246"
+      }
+    },
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzhlMWYzMjE1YjkxZmMwZTRiMDM2OTYiLCJpYXQiOjE2NzAyNjAyMDl9.xm1FXdpRyKHL3twVgs3PuSOiZzMMOnq5EuXujiKqIhY",
+      "_id": {
+        "$oid": "638e25f1a423ad3be0a9e7e5"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670155247499"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670260209554"
+    }
+  },
+  "__v": 4,
+  "confirmationCode": 666838
+}]

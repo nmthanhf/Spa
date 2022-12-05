@@ -3,11 +3,11 @@ const path = require('path')
 const morgan = require('morgan')
 const handlebars = require('express-handlebars')
 const bp = require('body-parser')
-
+const dotenv = require("dotenv").config()
 const app = express()
 const port = 3000
 const route = require('./routes')
-const db = require('./config/db')
+const db = require('./app/config/db')
 
 db.connect()
 app.use(morgan('combined'))
