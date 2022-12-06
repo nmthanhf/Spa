@@ -94,7 +94,9 @@ class AppointmentController {
     // }
 
     async userBooking(req, res, next) {
-        
+        const appointment = new Appointment(req.body)
+        appointment.save()
+        res.send({appointment})
     }
 
     //Lịch làm việc của một nhân viên

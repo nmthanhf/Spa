@@ -31,7 +31,7 @@ const appointmentSchema = mongoose.Schema({
     Description: {
         type: String
     },
-    Service: {
+    Treatment: {
         type: Object
     },
     date: {
