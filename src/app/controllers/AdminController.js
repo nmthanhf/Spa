@@ -124,11 +124,9 @@ class AdminController {
             .catch(next)
     }
 
-    async viewAppointment(req, res, next) {
+    async viewAllAppointment(req, res, next) {
         try {
-            done = req.params.done
-            paid = req.params.paid
-            const appointments = await Appointment.find({ done: done, paid: paid })
+            const appointments = await Appointment.find({})
             res.send({ appointments })
         } catch (error) {
             res.json({ error: error })
@@ -137,7 +135,7 @@ class AdminController {
 
     async viewPayroll(req, res, next) {
         try {
-            const employees = await Employee.find({ role: 'employee' }, 'name phoneNumber salary payroll')
+            const employees = await User.find({ role: 'employee' }, 'name phoneNumber salary payroll')
             res.send({ employees })
         } catch (error) {
             res.json({ error: error })

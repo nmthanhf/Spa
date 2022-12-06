@@ -39,7 +39,7 @@
   "phoneNumber": "0000000002",
   "password": "$2a$08$FogvlbZbGh4tqPeLLq7cMOK.hLESvuUm2XjJlMzODObAtnrjOZDsy",
   "address": "Thanh Hóa",
-  "role": "user",
+  "role": "employee",
   "salary": 0,
   "payroll": 0,
   "isVerify": true,

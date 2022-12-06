@@ -1,13 +1,17 @@
 const mongoose = require('mongoose')
 
 const appointmentSchema = mongoose.Schema({
+    Customer_id: {
+        type: String
+    },
+    Technician_id: {
+        type: String
+    },
     Customer: {
         type: String,
-        required: true
     },
     Subject: {
         type: String,
-        required: true,
     },
     StartTime: {
        type: String 
