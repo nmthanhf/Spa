@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-
 const treatmentSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     name: {
@@ -13,7 +12,7 @@ const treatmentSchema = mongoose.Schema({
         type: Number
     },
     mainImage: {
-        _id: {
+        id: {
             type: mongoose.Schema.Types.ObjectId
         },
         src: {
@@ -21,7 +20,7 @@ const treatmentSchema = mongoose.Schema({
         }
     },
     extraImage1: {
-        _id: {
+        id: {
             type: String
         },
         src: {
@@ -29,7 +28,7 @@ const treatmentSchema = mongoose.Schema({
         }
     },
     extraImage2: {
-        _id: {
+        id: {
             type: String
         },
         src: {
@@ -37,7 +36,7 @@ const treatmentSchema = mongoose.Schema({
         }
     },
     extraImage3: {
-        _id: {
+        id: {
             type: String
         },
         src: {
@@ -66,11 +65,7 @@ const treatmentSchema = mongoose.Schema({
         type: Number
     },
     ingredient: {
-        Array: {
-            name: String,
-            type: String,
-            amount : Number
-        }
+        type: Array
     },
     startDate: {
         type: String

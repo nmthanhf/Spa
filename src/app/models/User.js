@@ -34,7 +34,7 @@ const userSchema = mongoose.Schema({
     },
     salary: {
         type: Number,
-        default: 0
+        default: 10000000
     },
     payroll: {
         type: Number,

@@ -13,15 +13,15 @@ const productSchema = mongoose.Schema({
         type: Number
     },
     mainImage: {
-        _id: {
-            type: mongoose.Schema.Types.ObjectId
+        id: {
+            type: String
         },
         src: {
             type: String
         }
     },
     extraImage1: {
-        _id: {
+        id: {
             type: String
         },
         src: {
@@ -29,7 +29,7 @@ const productSchema = mongoose.Schema({
         }
     },
     extraImage2: {
-        _id: {
+        id: {
             type: String
         },
         src: {
@@ -37,7 +37,7 @@ const productSchema = mongoose.Schema({
         }
     },
     extraImage3: {
-        _id: {
+        id: {
             type: String
         },
         src: {

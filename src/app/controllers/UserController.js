@@ -52,9 +52,9 @@ class UserController {
             }
             const token = jwt.sign({ _id: user._id }, process.env.secret)
             user.tokens = user.tokens.concat({ token })
-            if (user.role.localeCompare("user") || user.role.localeCompare("employee")) {
+            if (user.role.localeCompare("user")) {
                 if (user.isVerify == false) {
-                    //await sendMail(user.email, user.confirmationCode)
+                    await sendMail(user.email, user.confirmationCode)
                     return res.json({
                         message: 'Tài khoản chưa được xác nhận, mời kiểm tra email'
                     })
