@@ -1,22 +1,23 @@
 const express = require('express')
+const verify = require('../app/middleware/verify')
 const router = express.Router()
 const appointmentController = require('../app/controllers/AppointmentController')
 const auth = require('../app/middleware/auth')
 //appointment/
 //Đưa ra  danh sách tất cả đặt lịch hiện có
-router.get('/index', auth.isUser, appointmentController.index)
+router.get('/index', auth.isUser, verify.async, appointmentController.index)
 
 //Đưa ra danh sách nhân viên và danh sách liệu trình
-router.get('/userbooking', auth.isUser, appointmentController.book)
+router.get('/userbooking', auth.isUser, verify.async, appointmentController.book)
 
 //Người dùng đặt lịch
-router.post('/userbooking', auth.isUser, appointmentController.userBooking)
+router.post('/userbooking', auth.isUser, verify.async, appointmentController.userBooking)
 
 //Xem chi tiết một lịch đã đặt (appointment) theo id
-router.get('/view/detail/:id', auth.isUser, appointmentController.viewDetail)
+router.get('/view/detail/:id', auth.isUser, verify.async, appointmentController.viewDetail)
 
 //Chỉnh sửa lịch đã đặt theo id appointment
-router.put('/:id/edit', auth.isUser, appointmentController.edit)
+router.put('/:id/edit', auth.isUser, verify.async, appointmentController.edit)
 
 //Xem danh sách lịch làm việc của một nhân viên
 router.get('/employee/view', auth.isEmployee, appointmentController.employeeView)
