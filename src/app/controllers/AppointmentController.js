@@ -1,6 +1,7 @@
 const User = require('../models/User')
 const Treatment = require('../models/Treatment')
 const Appointment = require('../models/Appointment')
+const { json } = require('body-parser')
 
 
 class AppointmentController {
@@ -9,25 +10,17 @@ class AppointmentController {
         const appointments = await Appointment.find({})
         res.send({ appointments })
     }
-
+    //Em có đẩy ra cả danh sách technicians, đến lúc đặt lịch anh đẩy thêm Technician_id vào giúp em
     async book(req, res, next) {
-        const employees = User.find({role: 'employee'})
+        const technicians = User.find({ role: 'employee' })
         const treatments = Treatment.find({})
-        res.send({employees, treatments})
-    }
-
-    //Đưa ra lịch làm việc của một nhân viên
-    //POST /appointment/show/:id
-    async show(req, res, next) {
-        const employee_id = req.params.id
-        const appointments = await Appointment.find({ employee_id: employee_id, "endDate": { $gte: (new Date().getTime() - 1000 * 3600 * 24) } })
-        res.send({ appointments })
+        res.send({ technicians, treatments })
     }
 
     //Xem tất cả đặt lịch của một người dùng
     //GET /appointment/view
     async view(req, res, next) {
-        const appointments = await Appointment.find({ user_id: req.user._id, "endDate": { $gte: (new Date().getTime() - 1000 * 3600 * 24) } })
+        const appointments = await Appointment.find({ Custom_id: req.user._id, "endDate": { $gte: (new Date().getTime() - 1000 * 3600 * 24) } })
         res.send({ appointments })
     }
 
@@ -57,51 +50,54 @@ class AppointmentController {
         }
     }
 
-    // async userBooking(req, res, next) {
-    //     try {
-    //         const user_id = req.body.user._id
-    //         const user_name = req.body.user.name
-    //         const user_phoneNumber = req.body.user.phoneNumber
-    //         const employee_id = req.body.employee._id
-    //         const employee_name = req.body.employee.name
-    //         const time = parseInt(req.body.treatment.time)
-    //         const treatment_price = req.body.treatment.price
-    //         const treatment_name = req.body.treatment.name
-    //         const startTime = String(req.body.startTime)
-    //         const startDate = new Date(req.body.startDate + "T" + startTime)
-    //         const hours = parseInt(startTime.slice(0, 2))
-    //         const minutes = parseInt(startTime.slice(3))
-    //         const endtTime = String((hours + time) + ":" + minutes)
-    //         const endDate = new Date(req.body.startDate + "T" + endtTime)
-    //         var count = await Appointment.find({ employee_id: employee_id, startDate: { $gte: startDate, $lt: endDate } }).count()
-    //         if (count == 0) {
-    //             count = await Appointment.find({ employee_id: employee_id, endDate: { $gte: startDate, $lt: endDate } }).count()
-    //         }
-    //         if (count != 0) {
-    //             return res.status(400).json({ error: 'Nhân viên đang bận trong khoảng thời gian này, mời đặt lịch vào thời gian khác hoặc với nhân viên khác' })
-    //         }
-    //         const appointment = new Appointment({
-    //             user_id: user_id, user_name: user_name, user_phoneNumber: user_phoneNumber,
-    //             employee_id: employee_id, employee_name: employee_name,
-    //             treatment_name: treatment_name, treatment_price: treatment_price,
-    //             startDate: startDate, endDate: endDate
-    //         })
-    //         appointment.save()
-    //         res.send({ appointment })
-    //     } catch (error) {
-    //         res.status(400).json({ error: 'Thông tin nhập vào không chính xác' })
-    //     }
-    // }
-
     async userBooking(req, res, next) {
-        const appointment = new Appointment(req.body)
-        appointment.save()
-        res.send({appointment})
+        //Tạo ngày dựa vào chọn ngày
+        try {
+            const dateCopy = new Date((new Date()).getTime());
+            const date = new Date(
+                dateCopy.setDate(
+                    dateCopy.getDate() + ((7 - dateCopy.getDay() + req.body.dayOfWeek + 1) % 7 || 7),
+                ))
+            req.body.date = date
+
+            //Tính thời gian bắt đầu và kết thúc
+            //Lưu trong dữ liệu vd:"2022-12-12T04:50:00.329Z"
+            var StartTime = String(req.body.StartTime)
+            var hours = parseInt(StartTime.slice(0, 2))
+            var minutes = parseInt(StartTime.slice(3))
+            StartTime = new Date(date.setHours(hours, minutes, 0))
+            var EndTime = String(req.body.EndTime)
+            hours = parseInt(EndTime.slice(0, 2))
+            minutes = parseInt(EndTime.slice(3))
+            var EndTime = new Date(date.setHours(hours, minutes, 0))
+
+            req.body.StartTime = StartTime
+            req.body.EndTime = EndTime
+
+            //Lấy ra thông tin khách hàng khách hàng
+            req.body.Custom_id = req.user._id
+            req.body.Customer = req.user.name
+
+            //Check xem lịch có bị trùng khi đặt cùng một nhân viên hay không
+            var count = await Appointment.find({ technician_id: req.technician_id, StartTime: { $gte: StartTime, $lt: EndTime } }).count()
+            if (count == 0) {
+                count = await Appointment.find({ technician_id: req.technician_id, EndTime: { $gte: StartTime, $lt: EndTime } }).count()
+            }
+            if (count != 0) {
+                return res.status(400).json({ error: 'Nhân viên đang bận trong khoảng thời gian này, mời đặt lịch vào thời gian khác hoặc với nhân viên khác' })
+            }
+            const appointment = new Appointment(req.body)
+            appointment.save()
+            res.send({ appointment })
+        } catch (error) {
+            console.log(error)
+            return res.json({ message: 'Đầu vào không hợp lệ' })
+        }
     }
 
     //Lịch làm việc của một nhân viên
     async employeeView(req, res, next) {
-        const appointments = await Appointment.find({ user_id: req.employee._id, "endDate": { $gte: (new Date().getTime() - 1000 * 3600 * 24) } })
+        const appointments = await Appointment.find({ Technician_id: req.user._id, "endDate": { $gte: (new Date().getTime() - 1000 * 3600 * 24) } })
         res.send({ appointments })
     }
 
@@ -135,57 +131,6 @@ class AppointmentController {
         Appointment.deleteOne({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next)
-    }
-
-    async employeeBooking(req, res, next) {
-        try {
-            const user = await User.find({ phoneNumber: req.body.phoneNumber })
-            const user_id = user._id
-            const user_name = user.name
-            const user_phoneNumber = user.phoneNumber
-            const employee_id = req.body.employee._id
-            const employee_name = req.body.employee.name
-            const time = parseInt(req.body.treatment.time)
-            const treatment_price = req.body.treatment.price
-            const treatment_name = req.body.treatment.name
-            const startTime = String(req.body.startTime)
-            const startDate = new Date(req.body.startDate + "T" + startTime)
-            const hours = parseInt(startTime.slice(0, 2))
-            const minutes = parseInt(startTime.slice(3))
-            const endtTime = String((hours + time) + ":" + minutes)
-            const endDate = new Date(req.body.startDate + "T" + endtTime)
-            var count = await Appointment.find({ employee_id: employee_id, startDate: { $gte: startDate, $lt: endDate } }).count()
-            if (count == 0) {
-                count = await Appointment.find({ employee_id: employee_id, endDate: { $gte: startDate, $lt: endDate } }).count()
-            }
-            if (count != 0) {
-                return res.status(400).json({ error: 'Nhân viên đang bận trong khoảng thời gian này, mời đặt lịch vào thời gian khác hoặc với nhân viên khác' })
-            }
-            const appointment = new Appointment({
-                user_id: user_id, user_name: user_name, user_phoneNumber: user_phoneNumber,
-                employee_id: employee_id, employee_name: employee_name,
-                treatment_name: treatment_name, treatment_price: treatment_price,
-                startDate: startDate, endDate: endDate
-            })
-            appointment.save()
-            res.send({ appointment })
-        } catch (error) {
-            res.json({ error: 'Không tìm thấy người dùng, hãy tạo thông tin cho khách hàng' })
-        }
-    }
-
-    async done(req, res, next) {
-        const _id = req.params.id
-        try {
-            await Appointment.updateOne({ _id: _id }, { $set: { done: 'true' } })
-            const appointment = await Appointment.findById(_id)
-            let commission = (appointment.treatment_price * 2 / 100)
-            await Employee.updateOne({ _id: appointment.employee_id }, { $inc: { payroll: commission } })
-            res.send(appointment)
-        } catch (error) {
-            console.log(error)
-            res.json({ error: 'Cập nhật thông tin lịch hẹn không thành công' })
-        }
     }
 }
 

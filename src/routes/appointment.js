@@ -30,7 +30,4 @@ router.put('/:id/employeeEdit', auth.isEmployee, appointmentController.employeeE
 //Xoá một lich đã đặt
 router.delete('/:id/delete', auth.isEmployee, appointmentController.delete)
 
-// //Nhân viên đặt lịch cho khách bằng số điện thoại
-// router.post('/employeebooking', auth.isEmployee, appointmentController.employeeBooking)
-
 module.exports = router
