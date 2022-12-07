@@ -13,12 +13,12 @@ router.post('/verify/:confirmationCode', auth.isUser, userController.verifyCode)
 router.post('/login', userController.login)
 
 // Xem thông tin tài khoản
-router.get('/profile', auth.isUser, verify.async, userController.profile)
+router.get('/profile', auth.isUser, verify.ok, userController.profile)
 
 // Sửa thông tin, nhận vào id người dùng 
-router.put('/:id/edit', auth.isUser,verify.async, userController.edit)
+router.put('/:id/edit', auth.isUser,verify.ok, userController.edit)
 
 //Đăng xuất
-router.post('/logout', auth.isUser,verify.async , userController.logout)
+router.post('/logout', auth.isUser,verify.ok , userController.logout)
 
 module.exports = router

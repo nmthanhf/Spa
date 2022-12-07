@@ -2,7 +2,7 @@
 const sendMail = require('../config/nodemailer')
 
 module.exports = {
-    async async (req, res, next) {
+    async ok (req, res, next) {
          if (req.user.isVerify == true) {
             next()
          } else {
