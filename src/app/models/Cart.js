@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 let ItemSchema = new Schema({
-    _id: {
+    productId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Product",
     },
@@ -14,7 +14,7 @@ let ItemSchema = new Schema({
         type: Number,
         required: true
     },
-    total: {
+    subtotal: {
         type: Number,
         required: true,
     }
@@ -26,11 +26,11 @@ const CartSchema = new Schema({
         type: String
     },
     items: [ItemSchema],
-    subTotal: {
+    total: {
         default: 0,
         type: Number
     }
 }, {
     timestamps: true
 })
-module.exports = mongoose.model('cart', CartSchema);
+module.exports = mongoose.model('Cart', CartSchema);
