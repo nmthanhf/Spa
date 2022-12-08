@@ -53,13 +53,19 @@ class AppointmentController {
     async userBooking(req, res, next) {
         //Tạo ngày dựa vào chọn ngày
         try {
-            const dateCopy = new Date((new Date()).getTime());
+            const now = new Date()
+            const dayOfWeek = Number.parseInt(req.body.dayOfWeek)
+            const days = (7 - now.getDay() + dayOfWeek)
             const date = new Date(
-                dateCopy.setDate(
-                    dateCopy.getDate() + ((7 - dateCopy.getDay() + req.body.dayOfWeek + 1) % 7 || 7),
-                ))
+                now.getFullYear(),
+                now.getMonth(),
+                now.getDate() 
+                   + days
+                )
+            if (date < new Date()) {
+                date.setDate(date.getDate() + 7)
+            }
             req.body.date = date
-
             //Tính thời gian bắt đầu và kết thúc
             //Lưu trong dữ liệu vd:"2022-12-12T04:50:00.329Z"
             var StartTime = String(req.body.StartTime)
@@ -73,11 +79,11 @@ class AppointmentController {
 
             req.body.StartTime = StartTime
             req.body.EndTime = EndTime
-
+            
             //Lấy ra thông tin khách hàng khách hàng
             req.body.Custom_id = req.user._id
             req.body.Customer = req.user.name
-
+            
             //Check xem lịch có bị trùng khi đặt cùng một nhân viên hay không
             var count = await Appointment.find({ technician_id: req.technician_id, StartTime: { $gte: StartTime, $lt: EndTime } }).count()
             if (count == 0) {

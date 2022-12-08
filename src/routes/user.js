@@ -16,7 +16,7 @@ router.post('/login', userController.login)
 router.get('/profile', auth.isUser, verify.ok, userController.profile)
 
 // Sửa thông tin, nhận vào id người dùng 
-router.put('/:id/edit', auth.isUser,verify.ok, userController.edit)
+router.put('/edit', auth.isUser,verify.ok, userController.edit)
 
 //Đăng xuất
 router.post('/logout', auth.isUser,verify.ok , userController.logout)

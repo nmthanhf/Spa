@@ -1,6 +1,7 @@
 
 const Product = require('../models/Product')
 const Treatment = require('../models/Treatment')
+const Appointment = require('../models/Appointment')
 const mongoose = require('mongoose')
 const fs = require('fs')
 const { Buffer } = require('buffer')
@@ -8,10 +9,9 @@ class AdminController {
 
     async createProduct(req, res, next) {
         try {
-            //console.log(req.files)
             let mainImagesrc, extraImage1src, extraImage2src, extraImage3src
             for (var i = 0; i < req.files.length; i++) {
-                const bitmap = fs.readFileSync(req.files[i].path)
+                var bitmap = fs.readFileSync(req.files[i].path)
                 var src = 'data:' + req.files[i].mimetype + ";base64,"
                 src += new Buffer(bitmap).toString('base64')
 
@@ -71,7 +71,7 @@ class AdminController {
             //console.log(req.files)
             let mainImagesrc, extraImage1src ="", extraImage2src="", extraImage3src=""
             for (var i = 0; i < req.files.length; i++) {
-                const bitmap = fs.readFileSync(req.files[i].path)
+                var bitmap = fs.readFileSync(req.files[i].path)
                 var src = 'data:' + req.files[i].mimetype + ";base64,"
                 src += new Buffer(bitmap).toString('base64')
                 src += ""
@@ -120,7 +120,8 @@ class AdminController {
 
     async deleteTreatment(req, res, next) {
         await Treatment.deleteOne({ _id: req.params.id })
-            .then(() => res.redirect('back'))
+            .then(() =>
+            res.redirect('back'))
             .catch(next)
     }
 

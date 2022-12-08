@@ -1,0 +1,62 @@
+[{
+  "_id": {
+    "$oid": "6392353319a3c0c4c472ed80"
+  },
+  "Customer_id": "6390b8c911e3e7f7ca4d39b5",
+  "items": [
+    {
+      "productId": {
+        "$oid": "638f5bd2539131eaf4776ee7"
+      },
+      "amount": 4,
+      "newPrice": 29000,
+      "subtotal": 116000,
+      "_id": {
+        "$oid": "6392353319a3c0c4c472ed81"
+      },
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1670526259376"
+        }
+      },
+      "updatedAt": {
+        "$date": {
+          "$numberLong": "1670526271546"
+        }
+      }
+    },
+    {
+      "productId": {
+        "$oid": "638f5c27539131eaf4776ef2"
+      },
+      "amount": 2,
+      "newPrice": 29000,
+      "subtotal": 58000,
+      "_id": {
+        "$oid": "6392355519a3c0c4c472ed91"
+      },
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1670526293145"
+        }
+      },
+      "updatedAt": {
+        "$date": {
+          "$numberLong": "1670526293145"
+        }
+      }
+    }
+  ],
+  "total": 174000,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670526259377"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670526293145"
+    }
+  },
+  "__v": 1
+}]

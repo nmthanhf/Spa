@@ -76,13 +76,13 @@ class UserController {
     }
 
     //Sửa thông tin  nhận vào id người dùng 
-    //Put /user/:id/edit
+    //Put /user/edit
     async edit(req, res, next) {
-        const _id = req.params.id
+        const _id = req.user._id
         try {
             await User.updateOne({ _id: _id }, req.body)
             const user = await User.findOne({_id: _id})
-            res.send(user)
+            res.send({user})
         } catch (error) {
             console.log(error)
             res.json({ error: 'Cập nhật không thành công thông tin người dùng' })

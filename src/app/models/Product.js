@@ -60,7 +60,7 @@ const productSchema = mongoose.Schema({
         type: String
     },
     status: {
-        type: Array
+        type: String
     },
     tags: {
         type: Array
