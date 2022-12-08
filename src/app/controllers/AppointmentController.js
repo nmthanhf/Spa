@@ -12,8 +12,8 @@ class AppointmentController {
     }
     //Em có đẩy ra cả danh sách technicians, đến lúc đặt lịch anh đẩy thêm Technician_id vào giúp em
     async book(req, res, next) {
-        const technicians = User.find({ role: 'employee' })
-        const treatments = Treatment.find({})
+        const technicians = await User.find({ role: 'employee' })
+        const treatments = await Treatment.find({})
         res.send({ technicians, treatments })
     }
 
