@@ -11,6 +11,16 @@ router.post('/deleteProduct/:id', auth.isAdmin, AdminController.deleteProduct)
 router.post('/deleteTreatment/:id', auth.isAdmin, AdminController.deleteTreatment)
 
 router.post('/appointment/', auth.isAdmin, AdminController.viewAllAppointment)
+
+// ten , luong, thuong
 router.post('/payroll', auth.isAdmin, AdminController.viewPayroll)
+
+//Xem danh sách và xoá tài khoản nv, kh
+//Thêm nv, thêm kh
+//thêm lịch cho kh
+//tạo đơn hàng cho khách
+//--báo cáo---
+//Xem ds nv, 
+//kh
 
 module.exports = router
