@@ -20,7 +20,7 @@ class AppointmentController {
     //Xem tất cả đặt lịch của một người dùng
     //GET /appointment/view
     async view(req, res, next) {
-        const appointments = await Appointment.find({ Custom_id: req.user._id, "endDate": { $gte: (new Date().getTime() - 1000 * 3600 * 24) } })
+        const appointments = await Appointment.find({ Custom_id: req.user._id, EndTime: { $gte: (new Date().getTime() - 1000 * 3600 * 24) } })
         res.send({ appointments })
     }
 
@@ -69,21 +69,23 @@ class AppointmentController {
             //Tính thời gian bắt đầu và kết thúc
             //Lưu trong dữ liệu vd:"2022-12-12T04:50:00.329Z"
             var StartTime = String(req.body.StartTime)
+
             var hours = parseInt(StartTime.slice(0, 2))
             var minutes = parseInt(StartTime.slice(3))
             StartTime = new Date(date.setHours(hours, minutes, 0))
-            var EndTime = String(req.body.EndTime)
-            hours = parseInt(EndTime.slice(0, 2))
-            minutes = parseInt(EndTime.slice(3))
-            var EndTime = new Date(date.setHours(hours, minutes, 0))
-
+            const treatment = await Treatment.findById(req.body.Treatment_id);
+            req.body.treatment = treatment
+            var time = Number.parseInt(treatment.duration);
+            
+            var EndTime = new Date(StartTime.getTime() + time*60*1000);
             req.body.StartTime = StartTime
             req.body.EndTime = EndTime
             
             //Lấy ra thông tin khách hàng khách hàng
-            req.body.Custom_id = req.user._id
-            req.body.Customer = req.user.name
-            
+            const user = await User.findById(req.user._id)
+            req.body.Customer_id = user._id
+            req.body.Customer = user.name
+
             //Check xem lịch có bị trùng khi đặt cùng một nhân viên hay không
             var count = await Appointment.find({ technician_id: req.technician_id, StartTime: { $gte: StartTime, $lt: EndTime } }).count()
             if (count == 0) {
@@ -103,7 +105,7 @@ class AppointmentController {
 
     //Lịch làm việc của một nhân viên
     async employeeView(req, res, next) {
-        const appointments = await Appointment.find({ Technician_id: req.user._id, "endDate": { $gte: (new Date().getTime() - 1000 * 3600 * 24) } })
+        const appointments = await Appointment.find({ Technician_id: req.user._id, EndTime: { $gte: (new Date().getTime() - 1000 * 3600 * 24) } })
         res.send({ appointments })
     }
 
@@ -114,8 +116,9 @@ class AppointmentController {
         console.log(_id)
         try {
             const appointment = await Appointment.findById(_id)
-            res.send(appointment)
+            res.send({appointment})
         } catch (error) {
+            console.log(error)
             res.json({ error: 'Không tìm thấy đặt lịch' })
         }
     }
@@ -138,6 +141,9 @@ class AppointmentController {
             .then(() => res.redirect('back'))
             .catch(next)
     }
+
+
+
 }
 
 module.exports = new AppointmentController

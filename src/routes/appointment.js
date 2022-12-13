@@ -19,11 +19,11 @@ router.get('/view/detail/:id', auth.isUser, verify.ok, appointmentController.vie
 //Chỉnh sửa lịch đã đặt theo id appointment
 router.put('/:id/edit', auth.isUser, verify.ok, appointmentController.edit)
 
-//Xem danh sách lịch làm việc của một nhân viên
-router.get('/employee/view', auth.isEmployee, appointmentController.employeeView)
-
 //Xem chi tiết một lịch đã đặt (appointment) theo id với nhân viên
 router.get('employee/view/detail/:id', auth.isEmployee, appointmentController.employeeViewDetail)
+
+//Xem danh sách lịch làm việc của một nhân viên
+router.get('/employee/view', auth.isEmployee, appointmentController.employeeView)
 
 //Chỉnh sửa lịch đã đặt theo id appointment
 router.put('/:id/employeeEdit', auth.isEmployee, appointmentController.employeeEdit)

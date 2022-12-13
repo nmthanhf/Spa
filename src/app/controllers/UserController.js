@@ -48,7 +48,7 @@ class UserController {
             }
             const isPasswordMatch = await bcrypt.compare(password, user.password)
             if (!isPasswordMatch) {
-                res.status(400).json({ error: 'Mật khẩu không chính xác' })
+                return res.status(400).json({ error: 'Mật khẩu không chính xác' })
             }
             const token = jwt.sign({ _id: user._id }, process.env.secret)
             user.tokens = user.tokens.concat({ token })
@@ -65,7 +65,7 @@ class UserController {
             res.send({ user, token })
         } catch (error) {
             console.log(error)
-            res.json({ error: 'Thông tin đã nhập không chính xác' })
+            return res.json({ error: 'Thông tin đã nhập không chính xác' })
         }
     }
 
@@ -85,7 +85,7 @@ class UserController {
             res.send({user})
         } catch (error) {
             console.log(error)
-            res.json({ error: 'Cập nhật không thành công thông tin người dùng' })
+            return res.json({ error: 'Cập nhật không thành công thông tin người dùng' })
         }
     }
 
@@ -99,7 +99,7 @@ class UserController {
             await req.user.save()
             res.redirect('/login')
         } catch (error) {
-            res.json({ error: 'Lỗi đăng xuất' })
+            return res.json({ error: 'Lỗi đăng xuất' })
         }
     }
 }
