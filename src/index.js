@@ -26,7 +26,8 @@ app.use(methodOverride('X-HTTP-Method-Override'))
 
 var corsOptions = {
    origin: 'http://localhost:3001',
-   optionsSuccessStatus: 200 
+   optionsSuccessStatus: 200,
+   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE' 
  }
 app.use(cors(corsOptions))
 
