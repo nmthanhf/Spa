@@ -6,7 +6,7 @@ const bp = require('body-parser')
 const dotenv = require("dotenv").config()
 const methodOverride = require('method-override')
 const app = express()
-const port = 3000
+const port = 3001
 const route = require('./routes')
 const db = require('./app/config/db')
 const cors = require('cors')
@@ -23,7 +23,13 @@ app.set('view engine', 'handlebars')
 app.set('views', path.join(__dirname, 'resources', 'views'))
 app.use('/files', express.static("files"));
 app.use(methodOverride('X-HTTP-Method-Override'))
-app.use(cors())
+
+var corsOptions = {
+   origin: 'http://localhost:3001',
+   optionsSuccessStatus: 200 
+ }
+app.use(cors(corsOptions))
+
 route(app);
 app.listen(port, () => {
    console.log(`App listening on port ${port}`)
