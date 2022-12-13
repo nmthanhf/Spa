@@ -31,7 +31,11 @@ router.put('/:id/employeeEdit', auth.isEmployee, appointmentController.employeeE
 //Xoá một lich đã đặt
 router.delete('/:id/delete', auth.isEmployee, appointmentController.delete)
 
-//Nhân viên đặt cho khách hàng dựa vào email
+//Đánh dấu một đặt lịch đã hoàn thành và tăng hoa hồng cho nhân viên, param là id của appointment
+router.post('/finish/:id', auth.isEmployee, appointmentController.finish)
+
+
+//Nhân viên đặt cho khách hàng dựa vào email (tạm thời admin có thể thêm r nên để sau đã)
 
 
 module.exports = router

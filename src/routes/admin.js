@@ -28,7 +28,10 @@ router.post('/addEmployee', auth.isAdmin, AdminController.addEmployee)
 router.post('/deleteAccount', auth.isAdmin, AdminController.deleteAccount)
 
 router.post('/addAppointment', auth.isAdmin, AdminController.addAppointment)
+
 //tạo đơn hàng
+router.post('/order', auth.isAdmin, AdminController.order)
+
 //--báo cáo---
 
 module.exports = router

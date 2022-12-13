@@ -142,6 +142,10 @@ class AppointmentController {
             .catch(next)
     }
 
+    async finish(req, res, next) {
+        
+    }
+
 }
 
 module.exports = new AppointmentController

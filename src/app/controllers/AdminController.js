@@ -250,6 +250,10 @@ class AdminController {
         }
 
     }
+
+    async order(req, res, next) {
+        
+    }
 }
 
 module.exports = new AdminController

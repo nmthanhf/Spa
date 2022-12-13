@@ -9,6 +9,7 @@ const app = express()
 const port = 3000
 const route = require('./routes')
 const db = require('./app/config/db')
+const cors = require('cors')
 
 db.connect()
 app.use(morgan('combined'))
@@ -17,12 +18,12 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(bp.json())
 app.use(bp.urlencoded({ extended: true }))
-app.engine('handlebars', handlebars.engine({ defaultLayout: 'main' }))
+//app.engine('handlebars', handlebars.engine({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 app.set('views', path.join(__dirname, 'resources', 'views'))
 app.use('/files', express.static("files"));
 app.use(methodOverride('X-HTTP-Method-Override'))
-// app.use(methodOverride('_method'))
+app.use(cors())
 route(app);
 app.listen(port, () => {
    console.log(`App listening on port ${port}`)
