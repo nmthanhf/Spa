@@ -25,11 +25,9 @@ router.post('/addcustomer', auth.isAdmin, AdminController.addCustomer)
 router.post('/addEmployee', auth.isAdmin, AdminController.addEmployee)
 
 //Xoá tài khoản theo email
-router.post('/delete', auth.isAdmin, AdminController.deleteAccount)
+router.post('/deleteAccount', auth.isAdmin, AdminController.deleteAccount)
 
-
-
-//thêm lịch cho kh
+router.post('/addAppointment', auth.isAdmin, AdminController.addAppointment)
 //tạo đơn hàng
 //--báo cáo---
 
