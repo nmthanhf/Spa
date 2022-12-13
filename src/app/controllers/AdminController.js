@@ -2,7 +2,10 @@
 const Product = require('../models/Product')
 const Treatment = require('../models/Treatment')
 const Appointment = require('../models/Appointment')
+const User = require('../models/User')
 const mongoose = require('mongoose')
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 const fs = require('fs')
 const { Buffer } = require('buffer')
 class AdminController {
@@ -136,10 +139,63 @@ class AdminController {
 
     async viewPayroll(req, res, next) {
         try {
-            const employees = await User.find({ role: 'employee' }, 'name phoneNumber salary payroll')
+            const employees = await User.find({ role: 'employee' }, 'name salary payroll')
             res.send({ employees })
         } catch (error) {
+            console.log(error)
             res.json({ error: error })
+        }
+    }
+
+    async show (req, res, next) {
+        try {
+            const users = await User.find({ role: 'user' })
+            const employees = await User.find({ role: 'employee' })
+            res.send({users, employees})
+        } catch (error) {
+            res.json({error: error})
+        }
+    }
+    
+    async addCustomer (req, res, next) {
+        try {
+        req.body.isVerify = 'true'
+        const user = new User(req.body)
+        user.password = '12345678'
+        const token = jwt.sign({ _id: user._id }, process.env.secret)
+            user.tokens = user.tokens.concat({ token })
+            user.confirmationCode = Math.floor(Math.random() * (999999 - 100000)) + 100000
+        await user.save()
+        res.send({user})
+        } catch (error) {
+            console.log(error)
+            res.json({error: 'Chưa thêm được người dùng'})
+        }
+    }
+
+    async addEmployee (req, res, next) {
+        try {
+        req.body.isVerify = 'true'
+        const user = new User(req.body)
+        user.password = '12345678'
+        user.role = 'employee'
+        const token = jwt.sign({ _id: user._id }, process.env.secret)
+            user.tokens = user.tokens.concat({ token })
+            user.confirmationCode = Math.floor(Math.random() * (999999 - 100000)) + 100000
+        await user.save()
+        res.send({user})
+        } catch (error) {
+            console.log(error)
+            res.json({error: 'Chưa thêm được nhân viên'})
+        }
+    }
+
+    async deleteAccount(req, res, next) {
+        try {
+            await User.deleteOne({email: req.body.email})
+            res.status(200).json({message: 'Xoá thông tin thành công'})
+        } catch (error) {
+            res.json({error: 'Xoá thông tin không thành công'})
         }
     }
 }

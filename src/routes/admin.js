@@ -15,12 +15,22 @@ router.post('/appointment/', auth.isAdmin, AdminController.viewAllAppointment)
 // ten , luong, thuong
 router.post('/payroll', auth.isAdmin, AdminController.viewPayroll)
 
-//Xem danh sách và xoá tài khoản nv, kh
-//Thêm nv, thêm kh
+//Xem danh sách nv, kh
+router.get ('/view', auth.isAdmin, AdminController.show)
+
+//Thêm kh, Bắt buộc phải có email, mk mặc định 12345678
+router.post('/addcustomer', auth.isAdmin, AdminController.addCustomer)
+
+//Thêm nv, Bắt buộc phải có email, mk mặc định 12345678
+router.post('/addEmployee', auth.isAdmin, AdminController.addEmployee)
+
+//Xoá tài khoản theo email
+router.post('/delete', auth.isAdmin, AdminController.deleteAccount)
+
+
+
 //thêm lịch cho kh
-//tạo đơn hàng cho khách
+//tạo đơn hàng
 //--báo cáo---
-//Xem ds nv, 
-//kh
 
 module.exports = router

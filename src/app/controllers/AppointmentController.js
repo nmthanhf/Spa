@@ -142,8 +142,6 @@ class AppointmentController {
             .catch(next)
     }
 
-
-
 }
 
 module.exports = new AppointmentController
