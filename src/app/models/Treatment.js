@@ -3,13 +3,14 @@ const treatmentSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     name: {
         type: String,
+        required: [true, 'Cần có tên liệu trình']
     },
     oldPrice: {
         type: Number
     },
     newPrice: {
         type: Number,
-        required: true
+        required: [true, 'Cần có giá mới nhất của liệu trình']
     },
     mainImage: {
         id: {
@@ -60,7 +61,7 @@ const treatmentSchema = mongoose.Schema({
     },
     duration: {
         type: Number,
-        required: true
+        required: [true, 'Cần có thời gian thực hiện liệu trình']
     },
     ingredient: {
         type: Array
@@ -70,7 +71,7 @@ const treatmentSchema = mongoose.Schema({
     },
     bonus: {
         type:Number,
-        required: true
+        required: [true, 'Cần có hoa hồng khi hoàn thành']
     },
     description: {
         type: String

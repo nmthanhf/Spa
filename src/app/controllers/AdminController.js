@@ -57,15 +57,17 @@ class AdminController {
         } catch (error) {
             console.log(error)
             return res.status(500).json({
-                error: 'Tạo sản phẩm mới không thành công'
+                message: error.message
             })
         }
     }
 
     async deleteProduct(req, res, next) {
+        try {
         await Product.deleteOne({ _id: req.params.id })
-            .then(() => res.redirect('back'))
-            .catch(next)
+        } catch (error) {
+            return res.json({message: 'Xoá sản phẩm không thành công'})
+        }
     }
 
 
@@ -116,7 +118,7 @@ class AdminController {
             return res.send({ treatment })
         } catch (error) {
             return res.status(500).json({
-                error: 'Tạo liệu trình mới không thành công'
+                message: error.message
             })
         }
     }
@@ -172,7 +174,7 @@ class AdminController {
             return res.send({ user })
         } catch (error) {
             console.log(error)
-            return res.json({ error: 'Chưa thêm được người dùng' })
+            return res.json({ message: error.message})
         }
     }
 
@@ -189,7 +191,7 @@ class AdminController {
             return res.send({ user })
         } catch (error) {
             console.log(error)
-            return res.json({ error: 'Chưa thêm được nhân viên' })
+            return res.json({ message: error.message })
         }
     }
 
@@ -249,7 +251,7 @@ class AdminController {
             return res.send({ appointment })
         } catch (error) {
             console.log(error)
-            return res.json({ message: 'Đầu vào không hợp lệ' })
+            return res.json({ message: error.message })
         }
 
     }
@@ -270,7 +272,7 @@ class AdminController {
             return res.json({message: 'Đặt lịch đã được đánh dấu hoàn thành trước đó'})
         }
         } catch (error) {
-            return res.json({message: 'Tác vụ không còn tồn tại'})
+            return res.json({message: error.message})
         }
     }
 

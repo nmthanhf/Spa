@@ -10,7 +10,7 @@ const userSchema = mongoose.Schema({
     },
     email: {
         type: String,
-        required: true,
+        required: [true, 'Địa chỉ email là bắt buộc'],
         unique: true,
         lowercase: true,
         validate: value => {
@@ -23,7 +23,7 @@ const userSchema = mongoose.Schema({
         type: String
     },
     password: {
-        type: String
+        type: String,
     },
     address: {
         type: String

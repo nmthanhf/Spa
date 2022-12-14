@@ -7,7 +7,7 @@ const appointmentSchema = mongoose.Schema({
     },
     Technician_id: {
         type: String,
-        required: true
+        required: [true, 'Technician_id là cần thiết']
     },
     Customer: {
         type: String,
@@ -17,7 +17,7 @@ const appointmentSchema = mongoose.Schema({
     },
     StartTime: {
        type: String,
-       required: true
+       required: [true, 'Cần có thời gian bắt đầu']
     },
     EndTime: {
         type: String
@@ -37,14 +37,14 @@ const appointmentSchema = mongoose.Schema({
     },
     Treatment_id: {
         type: String,
-        required: true
+        required: [true, 'Treatment_id là cần thiết']
     },
     date: {
         type: String
     },
     dayOfWeek: {
         type: String,
-        required: true
+        required: [true, 'dayOfWeek là cần thiết']
     },
     paid: {
         type: Boolean,

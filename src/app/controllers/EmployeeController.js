@@ -19,7 +19,7 @@ class UserController {
             return res.send({user})
         } catch (error) {
             console.log(error)
-            res.json({ error: 'Thông tin đã nhập không chính xác' })
+            res.json({ message: error.message})
         }
     }
 }

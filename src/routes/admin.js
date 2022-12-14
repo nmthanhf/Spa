@@ -31,7 +31,7 @@ router.post('/deleteAccount', auth.isAdmin, AdminController.deleteAccount)
 router.post('/addAppointment', auth.isAdmin, AdminController.addAppointment)
 
 //Đánh dấu đặt lịch đẫ hoàn thành và thêm hoa hồng cho nhân viên
-router.post('/finishAppoiment/:id', auth.isAdmin, AdminController.finishAppointment)
+router.post('/finishAppointment/:id', auth.isAdmin, AdminController.finishAppointment)
 
 //tạo đơn hàng
 router.post('/order', auth.isAdmin, AdminController.order)

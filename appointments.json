@@ -1,27 +1,103 @@
 [{
   "_id": {
-    "$oid": "6390b25df1f03d35b4a24b77"
+    "$oid": "639233a419a3c0c4c472ed6e"
   },
-  "Technician_id": "123123",
-  "Customer": "Nguyễn Thị Mai",
-  "Subject": "test abc",
-  "StartTime": "Mon Dec 12 2022 10:20:00 GMT+0700 (Giờ Đông Dương)",
-  "EndTime": "Mon Dec 12 2022 11:50:00 GMT+0700 (Giờ Đông Dương)",
-  "Status": "Đang xử lí",
-  "Technician": "REPLENISHING HYDRATOR",
+  "Technician_id": "638c8bef8f6daaa0c049c57c",
+  "Subject": "Chăm sóc da mặt",
+  "StartTime": "Mon Dec 12 2022 13:14:00 GMT+0700 (Giờ Đông Dương)",
+  "EndTime": "Mon Dec 12 2022 15:15:00 GMT+0700 (Giờ Đông Dương)",
+  "Status": "Đang xử lý",
+  "Technician": "Nguyễn Thành",
   "Location": "Meow Meow",
   "Description": "asfasdfasdf",
-  "date": "Mon Dec 12 2022 11:50:00 GMT+0700 (Giờ Đông Dương)",
+  "date": "Mon Dec 12 2022 15:15:00 GMT+0700 (Giờ Đông Dương)",
   "dayOfWeek": "1",
   "paid": false,
   "createdAt": {
     "$date": {
-      "$numberLong": "1670427229171"
+      "$numberLong": "1670525860690"
     }
   },
   "updatedAt": {
     "$date": {
-      "$numberLong": "1670427229171"
+      "$numberLong": "1670525860690"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "639233ac19a3c0c4c472ed75"
+  },
+  "Technician_id": "638c8bef8f6daaa0c049c57c",
+  "Subject": "Chăm sóc da mặt",
+  "StartTime": "Tue Dec 13 2022 13:14:00 GMT+0700 (Giờ Đông Dương)",
+  "EndTime": "Tue Dec 13 2022 15:15:00 GMT+0700 (Giờ Đông Dương)",
+  "Status": "Đang xử lý",
+  "Technician": "Nguyễn Thành",
+  "Location": "Meow Meow",
+  "Description": "asfasdfasdf",
+  "date": "Tue Dec 13 2022 15:15:00 GMT+0700 (Giờ Đông Dương)",
+  "dayOfWeek": "2",
+  "paid": false,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670525868458"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670525868458"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "639894f561189cdb367c5ac8"
+  },
+  "Customer_id": "639218ae2bf8380d07e9ca8e",
+  "Technician_id": "638c8bef8f6daaa0c049c57c",
+  "Customer": "Mai Mai",
+  "Subject": "Tắm trắng toàn thân",
+  "StartTime": "Mon Dec 19 2022 10:20:00 GMT+0700 (Giờ Đông Dương)",
+  "EndTime": "Mon Dec 19 2022 12:20:00 GMT+0700 (Giờ Đông Dương)",
+  "Status": "Đã hoàn thành",
+  "Treatment_id": "638f5a71e770c98d49194aad",
+  "date": "Mon Dec 19 2022 10:20:00 GMT+0700 (Giờ Đông Dương)",
+  "dayOfWeek": "1",
+  "paid": false,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670943989675"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1671044197836"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6398a81688016852a3014a35"
+  },
+  "Technician_id": "638c8bef8f6daaa0c049c57c",
+  "Customer": "Phi Hổ",
+  "Subject": "Tắm trắng toàn thân",
+  "StartTime": "Tue Dec 20 2022 14:22:00 GMT+0700 (Giờ Đông Dương)",
+  "EndTime": "Tue Dec 20 2022 16:22:00 GMT+0700 (Giờ Đông Dương)",
+  "Status": "Đã hoàn thành",
+  "Treatment_id": "638f5a71e770c98d49194aad",
+  "date": "Tue Dec 20 2022 14:22:00 GMT+0700 (Giờ Đông Dương)",
+  "dayOfWeek": "2",
+  "paid": false,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670948886870"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1671040457037"
     }
   },
   "__v": 0

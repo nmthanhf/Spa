@@ -98,7 +98,7 @@ class AppointmentController {
             res.send({ appointment })
         } catch (error) {
             console.log(error)
-            return res.json({ message: 'Nhập thiếu thông tin đầu vào' })
+            return res.json({ message: error.message})
         }
     }
 
@@ -164,7 +164,7 @@ class AppointmentController {
             return res.json({message: 'Đặt lịch đã được đánh dấu hoàn thành trước đó'})
         }
         } catch (error) {
-            res.json({message: 'Tác vụ không còn tồn tại'})
+            res.json({message: error.message})
         }
     }
 

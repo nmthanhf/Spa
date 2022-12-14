@@ -4,13 +4,14 @@ const productSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     name: {
         type: String,
-        required: true
+        required: [true, 'Cần có tên sản phẩm']
     },
     oldPrice: {
         type: Number
     },
     newPrice: {
-        type: Number
+        type: Number,
+        required: [true, 'Cần có giá mới nhất']
     },
     mainImage: {
         id: {
