@@ -16,20 +16,20 @@ class UserController {
             await sendMail(user.email, user.confirmationCode)
             await user.save()
             res.send({user})
-            //res.status(201).redirect('/verify')
+            
         } catch (error) {
             console.log(error)
-            res.json({ error: 'Thông tin đã nhập không chính xác' })
+            res.json({ error: 'Thông tin đã nhập chưa chính xác' })
         }
     }
 
     async verifyCode(req, res, next) {
         if (req.params.confirmationCode == req.user.confirmationCode) {
             await User.updateOne({ _id: req.user._id, }, { $set: { isVerify: 'true' } })
-            res.json({message: 'Nhập conde thành công'})
+            return res.json({message: 'Nhập conde thành công'})
             //res.redirect('/home')
         } else {
-            res.json({
+            return res.json({
                 message: 'Mã xác nhân không chính xác'
             })
         }
@@ -72,7 +72,7 @@ class UserController {
     //Xem thông tin
     // GET user/profile
     async profile(req, res, next) {
-        res.send(req.user)
+        return res.send(req.user)
     }
 
     //Sửa thông tin  nhận vào id người dùng 
@@ -82,7 +82,7 @@ class UserController {
         try {
             await User.updateOne({ _id: _id }, req.body)
             const user = await User.findOne({_id: _id})
-            res.send({user})
+            return res.send({user})
         } catch (error) {
             console.log(error)
             return res.json({ error: 'Cập nhật không thành công thông tin người dùng' })
@@ -97,7 +97,8 @@ class UserController {
                 return token.token != req.token
             })
             await req.user.save()
-            res.redirect('/login')
+            //res.redirect('/login')
+            return res.json({message: 'Đăng xuất thành công'})
         } catch (error) {
             return res.json({ error: 'Lỗi đăng xuất' })
         }

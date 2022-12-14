@@ -8,7 +8,8 @@ const treatmentSchema = mongoose.Schema({
         type: Number
     },
     newPrice: {
-        type: Number
+        type: Number,
+        required: true
     },
     mainImage: {
         id: {
@@ -45,9 +46,6 @@ const treatmentSchema = mongoose.Schema({
     view: {
         type: Number
     },
-    amount: {
-        type:Number
-    },
     rating: {
         type: Number
     },
@@ -61,7 +59,8 @@ const treatmentSchema = mongoose.Schema({
         type: Array
     },
     duration: {
-        type: Number
+        type: Number,
+        required: true
     },
     ingredient: {
         type: Array
@@ -70,10 +69,8 @@ const treatmentSchema = mongoose.Schema({
         type: String
     },
     bonus: {
-        type:Number
-    },
-    brand: {
-        type: String
+        type:Number,
+        required: true
     },
     description: {
         type: String

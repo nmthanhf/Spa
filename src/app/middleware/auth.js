@@ -18,11 +18,12 @@ module.exports = {
                 next()
 
             } catch (error) {
-                res.status(401).send({ error: 'Bạn không được phép truy cập vào trang này' })
+                return res.status(401).send({ error: 'Bạn không được phép truy cập vào trang này' })
             }
         } catch (error) {
             //res.json('/Quay lại trang đăng nhập')
-            res.redirect('/login')
+            //res.redirect('/login')
+            return res.json({message: 'Mời đăng nhập lại'})
         }
     },
     isEmployee: async (req, res, next) => {
@@ -39,11 +40,11 @@ module.exports = {
                 req.token = token
                 next()
             } catch (error) {
-                res.status(401).send({ error: 'Bạn không được phép truy cập vào trang này' })
+                return res.status(401).send({ error: 'Bạn không được phép truy cập vào trang này' })
             }
         } catch (error) {
             //res.json('/Quay lại trang đăng nhập')
-            res.redirect('/login')
+            return res.json({message: 'Mời đăng nhập lại'})
         }
     },
     isAdmin: async (req, res, next) => {
@@ -62,11 +63,11 @@ module.exports = {
                 
             } catch (error) {
                 //console.log(error)
-                res.status(401).send({ error: 'Bạn không được phép truy cập vào trang này' })
+                return res.status(401).send({ error: 'Bạn không được phép truy cập vào trang này' })
             }
         } catch (error) {
             //res.json('/Quay lại trang đăng nhập')
-            res.redirect('/login')
+            return res.json({message: 'Mời đăng nhập lại'})
         }
     }
 }

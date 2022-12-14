@@ -7,7 +7,7 @@ module.exports = {
             next()
          } else {
             await sendMail(req.user.email, req.user.confirmationCode)
-            res.json({message: 'Tài khoản chưa xác nhận, mời kiểm tra email'})  
+            return res.json({message: 'Tài khoản chưa xác nhận, mời kiểm tra email'})  
          }
     }
 }

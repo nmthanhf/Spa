@@ -16,8 +16,7 @@ class UserController {
             user.confirmationCode = Math.floor(Math.random() * (999999 - 100000)) + 100000
             await sendMail(user.email, user.confirmationCode)
             await user.save()
-            res.send({user})
-            //res.status(201).redirect('/verify')
+            return res.send({user})
         } catch (error) {
             console.log(error)
             res.json({ error: 'Thông tin đã nhập không chính xác' })

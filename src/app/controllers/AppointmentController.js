@@ -7,20 +7,20 @@ class AppointmentController {
     // Đưa ra tất cả đặt lịch hiện có
     async index(req, res, next) {
         const appointments = await Appointment.find({})
-        res.send({ appointments })
+        return res.send({ appointments })
     }
     //Em có đẩy ra cả danh sách technicians, đến lúc đặt lịch anh đẩy thêm Technician_id vào giúp em
     async book(req, res, next) {
         const technicians = await User.find({ role: 'employee' })
         const treatments = await Treatment.find({})
-        res.send({ technicians, treatments })
+        return res.send({ technicians, treatments })
     }
 
     //Xem tất cả đặt lịch của một người dùng
     //GET /appointment/view
     async view(req, res, next) {
         const appointments = await Appointment.find({ Custom_id: req.user._id, EndTime: { $gte: (new Date().getTime() - 1000 * 3600 * 24) } })
-        res.send({ appointments })
+        return res.send({ appointments })
     }
 
     //Xem thông tin chi tiết một lịch đã đặt
@@ -30,9 +30,9 @@ class AppointmentController {
         console.log(_id)
         try {
             const appointment = await Appointment.findById(_id)
-            res.send(appointment)
+            return res.send(appointment)
         } catch (error) {
-            res.json({ error: 'Không tìm thấy đặt lịch' })
+            return res.json({ error: 'Không tìm thấy đặt lịch' })
         }
     }
 
@@ -43,9 +43,9 @@ class AppointmentController {
         try {
             await Appointment.updateOne({ _id: _id }, req.body)
             const appointment = await Appointment.findById(_id)
-            res.send(appointment)
+            return res.send({appointment})
         } catch (error) {
-            res.json({ error: 'Cập nhật thông tin lịch hẹn không thành công' })
+            return res.json({ error: 'Cập nhật thông tin lịch hẹn không thành công' })
         }
     }
 
@@ -98,14 +98,18 @@ class AppointmentController {
             res.send({ appointment })
         } catch (error) {
             console.log(error)
-            return res.json({ message: 'Đầu vào không hợp lệ' })
+            return res.json({ message: 'Nhập thiếu thông tin đầu vào' })
         }
     }
 
     //Lịch làm việc của một nhân viên
     async employeeView(req, res, next) {
+        try {
         const appointments = await Appointment.find({ Technician_id: req.user._id, EndTime: { $gte: (new Date().getTime() - 1000 * 3600 * 24) } })
-        res.send({ appointments })
+        return res.send({ appointments })
+        } catch (error) {
+            return res.json({message: 'Không tìm thấy nhân viên'})
+        }
     }
 
     //Xem thông tin chi tiết một lịch đã đặt
@@ -115,10 +119,10 @@ class AppointmentController {
         console.log(_id)
         try {
             const appointment = await Appointment.findById(_id)
-            res.send({appointment})
+            return res.send({appointment})
         } catch (error) {
             console.log(error)
-            res.json({ error: 'Không tìm thấy đặt lịch' })
+            return res.json({ error: 'Không tìm thấy đặt lịch' })
         }
     }
 
@@ -129,16 +133,20 @@ class AppointmentController {
         try {
             await Appointment.updateOne({ _id: _id }, req.body)
             const appointment = await Appointment.findById(_id)
-            res.send(appointment)
+            return res.send(appointment)
         } catch (error) {
-            res.json({ error: 'Cập nhật thông tin lịch hẹn không thành công' })
+            return res.json({ error: 'Cập nhật thông tin lịch hẹn không thành công' })
         }
     }
 
     async delete(req, res, next) {
-        Appointment.deleteOne({ _id: req.params.id })
-            .then(() => res.redirect('back'))
-            .catch(next)
+        try {
+        await Appointment.deleteOne({ _id: req.params.id })
+        return res.json({message: 'Xoá đặt lịch thành công'})
+        } catch (error) {
+            console.log(error)
+            return res.json({message: 'Xoá đặt lịch thất bại'})
+        }
     }
 
     async finish(req, res, next) {

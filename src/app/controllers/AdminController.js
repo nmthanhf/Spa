@@ -53,10 +53,10 @@ class AdminController {
             }
             )
             product.save()
-            res.send({ product })
+            return res.send({ product })
         } catch (error) {
             console.log(error)
-            res.status(500).json({
+            return res.status(500).json({
                 error: 'Tạo sản phẩm mới không thành công'
             })
         }
@@ -113,37 +113,40 @@ class AdminController {
             }
             )
             treatment.save()
-            res.send({ treatment })
+            return res.send({ treatment })
         } catch (error) {
-            res.status(500).json({
+            return res.status(500).json({
                 error: 'Tạo liệu trình mới không thành công'
             })
         }
     }
 
     async deleteTreatment(req, res, next) {
+        try {
         await Treatment.deleteOne({ _id: req.params.id })
-            .then(() =>
-                res.redirect('back'))
-            .catch(next)
+        return res.json({message: 'Xoá liệu trình thành công'})
+        } catch (error) {
+            return res.json({message: 'Xoá liệu trình không thành công'})
+        }
+    
     }
 
     async viewAllAppointment(req, res, next) {
         try {
             const appointments = await Appointment.find({})
-            res.send({ appointments })
+            return res.send({ appointments })
         } catch (error) {
-            res.json({ error: error })
+            return res.json({ error: "Lại lỗi r T.T" })
         }
     }
 
     async viewPayroll(req, res, next) {
         try {
             const employees = await User.find({ role: 'employee' }, 'name salary payroll')
-            res.send({ employees })
+            return res.send({ employees })
         } catch (error) {
             console.log(error)
-            res.json({ error: error })
+            return res.json({ error: "Lại lỗi r T.T" })
         }
     }
 
@@ -151,9 +154,9 @@ class AdminController {
         try {
             const users = await User.find({ role: 'user' })
             const employees = await User.find({ role: 'employee' })
-            res.send({ users, employees })
+            return res.send({ users, employees })
         } catch (error) {
-            res.json({ error: error })
+            return res.json({ error: "Lại lỗi r T.T" })
         }
     }
 
@@ -166,10 +169,10 @@ class AdminController {
             user.tokens = user.tokens.concat({ token })
             user.confirmationCode = Math.floor(Math.random() * (999999 - 100000)) + 100000
             await user.save()
-            res.send({ user })
+            return res.send({ user })
         } catch (error) {
             console.log(error)
-            res.json({ error: 'Chưa thêm được người dùng' })
+            return res.json({ error: 'Chưa thêm được người dùng' })
         }
     }
 
@@ -183,19 +186,19 @@ class AdminController {
             user.tokens = user.tokens.concat({ token })
             user.confirmationCode = Math.floor(Math.random() * (999999 - 100000)) + 100000
             await user.save()
-            res.send({ user })
+            return res.send({ user })
         } catch (error) {
             console.log(error)
-            res.json({ error: 'Chưa thêm được nhân viên' })
+            return res.json({ error: 'Chưa thêm được nhân viên' })
         }
     }
 
     async deleteAccount(req, res, next) {
         try {
             await User.deleteOne({ email: req.body.email })
-            res.status(200).json({ message: 'Xoá thông tin thành công' })
+            return res.status(200).json({ message: 'Xoá thông tin thành công' })
         } catch (error) {
-            res.json({ error: 'Xoá thông tin không thành công' })
+            return res.json({ error: 'Xoá thông tin không thành công' })
         }
     }
 
@@ -243,7 +246,7 @@ class AdminController {
             }
             const appointment = new Appointment(req.body)
             appointment.save()
-            res.send({ appointment })
+            return res.send({ appointment })
         } catch (error) {
             console.log(error)
             return res.json({ message: 'Đầu vào không hợp lệ' })
@@ -267,7 +270,7 @@ class AdminController {
             return res.json({message: 'Đặt lịch đã được đánh dấu hoàn thành trước đó'})
         }
         } catch (error) {
-            res.json({message: 'Tác vụ không còn tồn tại'})
+            return res.json({message: 'Tác vụ không còn tồn tại'})
         }
     }
 

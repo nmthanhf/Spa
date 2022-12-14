@@ -9,12 +9,20 @@ class ProductController {
 
     async getById(req, res, next) {
         id = req.params.id
+        try {
         const product = await Product.findById(id);
-        res.send({product})
+        return res.send({product})
+        } catch (error) {
+            return res.json({message: 'Không tìm thấy sản phẩm'})
+        }
 }
     async getById(id) {
-            const product = await Product.findById(id);
-            return product
+        try {
+        const product = await Product.findById(id);
+        return product
+        } catch (error) {
+            return 0;
+        }
     }
 }
 

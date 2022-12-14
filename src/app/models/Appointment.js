@@ -2,10 +2,12 @@ const mongoose = require('mongoose')
 
 const appointmentSchema = mongoose.Schema({
     Customer_id: {
-        type: String
+        type: String,
+        
     },
     Technician_id: {
-        type: String
+        type: String,
+        required: true
     },
     Customer: {
         type: String,
@@ -14,7 +16,8 @@ const appointmentSchema = mongoose.Schema({
         type: String,
     },
     StartTime: {
-       type: String 
+       type: String,
+       required: true
     },
     EndTime: {
         type: String
@@ -33,13 +36,15 @@ const appointmentSchema = mongoose.Schema({
         type: String
     },
     Treatment_id: {
-        type: String
+        type: String,
+        required: true
     },
     date: {
         type: String
     },
     dayOfWeek: {
-        type: String
+        type: String,
+        required: true
     },
     paid: {
         type: Boolean,
