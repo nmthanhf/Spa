@@ -21,7 +21,7 @@ const appointmentSchema = mongoose.Schema({
     },
     Status: {
         type:String,
-        default: "Đang xử lý"
+        default: 'Đang xử lý'
     },
     Technician: {
         type: String

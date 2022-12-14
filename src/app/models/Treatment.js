@@ -69,8 +69,8 @@ const treatmentSchema = mongoose.Schema({
     startDate: {
         type: String
     },
-    bounus: {
-        type:Object
+    bonus: {
+        type:Number
     },
     brand: {
         type: String

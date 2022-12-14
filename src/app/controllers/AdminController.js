@@ -251,6 +251,26 @@ class AdminController {
 
     }
 
+
+    async finishAppointment(req, res, next) {
+        const _id = req.params.id
+        try {
+        const appointment = await Appointment.findById(_id)
+        if (appointment.Status.localeCompare('Đang xử lý') == 0) {
+        await Appointment.updateOne ({_id: _id}, {$set: {Status: 'Đã hoàn thành'}})
+        const treatment = await Treatment.findById(appointment.Treatment_id)
+        const val = (treatment.bonus)/100 * treatment.newPrice
+        await User.updateOne({_id: appointment.Technician_id}, {$inc: {payroll: val}})
+        const employee = await User.findById(appointment.Technician_id)
+        return res.status(200).json({message: 'Đã hoàn thành lịch vừa chọn'})
+        } else {
+            return res.json({message: 'Đặt lịch đã được đánh dấu hoàn thành trước đó'})
+        }
+        } catch (error) {
+            res.json({message: 'Tác vụ không còn tồn tại'})
+        }
+    }
+
     async order(req, res, next) {
         
     }

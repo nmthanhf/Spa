@@ -27,7 +27,11 @@ router.post('/addEmployee', auth.isAdmin, AdminController.addEmployee)
 //Xoá tài khoản theo email
 router.post('/deleteAccount', auth.isAdmin, AdminController.deleteAccount)
 
+//Đặt lịch cho người dùng theo email
 router.post('/addAppointment', auth.isAdmin, AdminController.addAppointment)
+
+//Đánh dấu đặt lịch đẫ hoàn thành và thêm hoa hồng cho nhân viên
+router.post('/finishAppoiment/:id', auth.isAdmin, AdminController.finishAppointment)
 
 //tạo đơn hàng
 router.post('/order', auth.isAdmin, AdminController.order)
