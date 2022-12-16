@@ -24,6 +24,14 @@ class ProductController {
             return 0;
         }
     }
+    async updateAmout(id, amount) {
+        try {
+            let update = parseInt(amount*(-1))
+            await Product.updateOne({_id: id}, {$inc: {amount: update}})
+        } catch(error){
+            console.log(error)
+        }
+    }
 }
 
 module.exports = new ProductController

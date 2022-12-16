@@ -10,10 +10,21 @@ let ItemSchema = new Schema({
         required: true,
         min: [1, 'Số lượng không thể nhỏ hơn 1']
     },
+    newPrice: {
+        type: Number,
+        required: true
+    },
+    subtotal: {
+        type: Number,
+        required: true,
+    }
 }, {
     timestamps: true
 })
 const OrderSchema = new Schema({
+    email: {
+        type: String
+    },
     items: [ItemSchema],
     total: {
         default: 0,

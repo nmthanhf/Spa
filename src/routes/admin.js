@@ -33,7 +33,11 @@ router.post('/addAppointment', auth.isAdmin, AdminController.addAppointment)
 //Đánh dấu đặt lịch đẫ hoàn thành và thêm hoa hồng cho nhân viên
 router.post('/finishAppointment/:id', auth.isAdmin, AdminController.finishAppointment)
 
+//Sửa thông tin nv, kh
+router.put('/editAccount/:id', auth.isAdmin, AdminController.editAccount)
+
 //tạo đơn hàng
+//Nhận vào một ds sản phẩm
 router.post('/order', auth.isAdmin, AdminController.order)
 
 //--báo cáo---

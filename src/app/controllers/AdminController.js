@@ -7,7 +7,10 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const fs = require('fs')
+const Order = require('../models/Order')
 const { Buffer } = require('buffer')
+const { errorMonitor } = require('events')
+const ProductController = require('./ProductController')
 class AdminController {
 
     async createProduct(req, res, next) {
@@ -37,7 +40,7 @@ class AdminController {
                 newPrice: req.body.newPrice,
                 view: req.body.view,
                 color: req.body.color,
-                amount: req.body.mount,
+                amount: req.body.amount,
                 rating: req.body.rating,
                 category: req.body.category,
                 status: req.body.status,
@@ -64,9 +67,9 @@ class AdminController {
 
     async deleteProduct(req, res, next) {
         try {
-        await Product.deleteOne({ _id: req.params.id })
+            await Product.deleteOne({ _id: req.params.id })
         } catch (error) {
-            return res.json({message: 'Xoá sản phẩm không thành công'})
+            return res.json({ message: 'Xoá sản phẩm không thành công' })
         }
     }
 
@@ -96,7 +99,6 @@ class AdminController {
                 oldPrice: req.body.oldPrice,
                 newPrice: req.body.newPrice,
                 view: req.body.view,
-                amount: req.body.mount,
                 rating: req.body.rating,
                 category: req.body.category,
                 status: req.body.status,
@@ -125,12 +127,12 @@ class AdminController {
 
     async deleteTreatment(req, res, next) {
         try {
-        await Treatment.deleteOne({ _id: req.params.id })
-        return res.json({message: 'Xoá liệu trình thành công'})
+            await Treatment.deleteOne({ _id: req.params.id })
+            return res.json({ message: 'Xoá liệu trình thành công' })
         } catch (error) {
-            return res.json({message: 'Xoá liệu trình không thành công'})
+            return res.json({ message: 'Xoá liệu trình không thành công' })
         }
-    
+
     }
 
     async viewAllAppointment(req, res, next) {
@@ -174,7 +176,7 @@ class AdminController {
             return res.send({ user })
         } catch (error) {
             console.log(error)
-            return res.json({ message: error.message})
+            return res.json({ message: error.message })
         }
     }
 
@@ -192,6 +194,18 @@ class AdminController {
         } catch (error) {
             console.log(error)
             return res.json({ message: error.message })
+        }
+    }
+
+    async editAccount(req, res, next) {
+        const _id = req.params.id
+        try {
+            await User.updateOne({ _id: _id }, req.body)
+            const user = await User.findOne({ _id: _id })
+            return res.send({ user })
+        } catch (error) {
+            console.log(error)
+            return res.json({ error: 'Cập nhật không thành công thông tin người dùng' })
         }
     }
 
@@ -235,7 +249,7 @@ class AdminController {
             req.body.EndTime = EndTime
 
             //Lấy ra thông tin khách hàng khách hàng
-            const user = await User.findOne({email: req.body.email})
+            const user = await User.findOne({ email: req.body.email })
             req.body.Customer = user.name
 
             //Check xem lịch có bị trùng khi đặt cùng một nhân viên hay không
@@ -260,24 +274,52 @@ class AdminController {
     async finishAppointment(req, res, next) {
         const _id = req.params.id
         try {
-        const appointment = await Appointment.findById(_id)
-        if (appointment.Status.localeCompare('Đang xử lý') == 0) {
-        await Appointment.updateOne ({_id: _id}, {$set: {Status: 'Đã hoàn thành'}})
-        const treatment = await Treatment.findById(appointment.Treatment_id)
-        const val = (treatment.bonus)/100 * treatment.newPrice
-        await User.updateOne({_id: appointment.Technician_id}, {$inc: {payroll: val}})
-        const employee = await User.findById(appointment.Technician_id)
-        return res.status(200).json({message: 'Đã hoàn thành lịch vừa chọn'})
-        } else {
-            return res.json({message: 'Đặt lịch đã được đánh dấu hoàn thành trước đó'})
-        }
+            const appointment = await Appointment.findById(_id)
+            if (appointment.Status.localeCompare('Đang xử lý') == 0) {
+                await Appointment.updateOne({ _id: _id }, { $set: { Status: 'Đã hoàn thành' } })
+                const treatment = await Treatment.findById(appointment.Treatment_id)
+                const val = (treatment.bonus) / 100 * treatment.newPrice
+                await User.updateOne({ _id: appointment.Technician_id }, { $inc: { payroll: val } })
+                const employee = await User.findById(appointment.Technician_id)
+                return res.status(200).json({ message: 'Đã hoàn thành lịch vừa chọn' })
+            } else {
+                return res.json({ message: 'Đặt lịch đã được đánh dấu hoàn thành trước đó' })
+            }
         } catch (error) {
-            return res.json({message: error.message})
+            return res.json({ message: error.message })
         }
     }
 
     async order(req, res, next) {
-        
+        try {
+            const products = req.body.products
+            let order, subtotal
+            for (var i = 0; i < products.length; i++) {
+                let product = await Product.findById(products[i].productId)
+                let item = {
+                    productId: product._id,
+                    amount: parseInt(products[i].amount),
+                    newPrice: product.newPrice,
+                    subtotal: parseInt(parseInt(products[i].amount) * product.newPrice)
+                }
+                if (i == 0) {
+                    order = new Order({ items: item, total: subtotal })
+                } else if (i > 0) {
+                    console.log(item)
+                    order.items.push(item)
+                    order.total = order.items.map(item => item.subtotal).reduce((acc, next) => acc + next);
+                }
+                ProductController.updateAmout(product._id, parseInt(products[i].amount))
+            }
+            order.email = req.body.email
+
+
+            order.save()
+            return res.json({ order })
+        } catch (error) {
+            console.log(error)
+            return res.json({ message: error.message })
+        }
     }
 }
 
