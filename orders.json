@@ -1,0 +1,123 @@
+[{
+  "_id": {
+    "$oid": "639c7a46fbed5d36a9116da4"
+  },
+  "items": [
+    {
+      "productId": {
+        "$oid": "638f5bd2539131eaf4776ee7"
+      },
+      "amount": 2,
+      "newPrice": 29000,
+      "subtotal": 58000,
+      "_id": {
+        "$oid": "639c7a46fbed5d36a9116da5"
+      },
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1671199302226"
+        }
+      },
+      "updatedAt": {
+        "$date": {
+          "$numberLong": "1671199302226"
+        }
+      }
+    },
+    {
+      "productId": {
+        "$oid": "638f5c27539131eaf4776ef2"
+      },
+      "amount": 3,
+      "newPrice": 29000,
+      "subtotal": 87000,
+      "_id": {
+        "$oid": "639c7a46fbed5d36a9116da8"
+      },
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1671199302227"
+        }
+      },
+      "updatedAt": {
+        "$date": {
+          "$numberLong": "1671199302227"
+        }
+      }
+    }
+  ],
+  "total": 145000,
+  "email": "hjffj@gmail.com",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1671199302231"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1671199302231"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "639c7a76fbed5d36a9116db1"
+  },
+  "items": [
+    {
+      "productId": {
+        "$oid": "638f5bd2539131eaf4776ee7"
+      },
+      "amount": 2,
+      "newPrice": 29000,
+      "subtotal": 58000,
+      "_id": {
+        "$oid": "639c7a76fbed5d36a9116db2"
+      },
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1671199350526"
+        }
+      },
+      "updatedAt": {
+        "$date": {
+          "$numberLong": "1671199350526"
+        }
+      }
+    },
+    {
+      "productId": {
+        "$oid": "638f5c27539131eaf4776ef2"
+      },
+      "amount": 3,
+      "newPrice": 29000,
+      "subtotal": 87000,
+      "_id": {
+        "$oid": "639c7a76fbed5d36a9116db5"
+      },
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1671199350526"
+        }
+      },
+      "updatedAt": {
+        "$date": {
+          "$numberLong": "1671199350526"
+        }
+      }
+    }
+  ],
+  "total": 145000,
+  "email": "hjffj@gmail.com",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1671199350526"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1671199350526"
+    }
+  },
+  "__v": 0
+}]

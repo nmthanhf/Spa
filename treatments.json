@@ -25,6 +25,7 @@
   },
   "view": 1,
   "rating": 5,
+  "bonus": 2,
   "category": "Chăm sóc cơ thể",
   "status": [
     "\"On sale\""
@@ -76,6 +77,7 @@
   },
   "view": 1,
   "rating": 5,
+  "bonus": 2,
   "category": "Chăm sóc cơ thể",
   "status": [
     "\"On sale\""
@@ -97,6 +99,47 @@
   "updatedAt": {
     "$date": {
       "$numberLong": "1670339319235"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63922474aa8f8903844709be"
+  },
+  "name": "Chăm sóc da",
+  "oldPrice": 40000,
+  "newPrice": 30000,
+  "mainImage": {
+    "id": {
+      "$oid": "63922474aa8f8903844709bf"
+    }
+  },
+  "extraImage1": {
+    "id": "63922474aa8f8903844709c0",
+    "src": ""
+  },
+  "extraImage2": {
+    "id": "63922474aa8f8903844709c1",
+    "src": ""
+  },
+  "extraImage3": {
+    "id": "63922474aa8f8903844709c2",
+    "src": ""
+  },
+  "status": [
+    "On Sale"
+  ],
+  "tags": [],
+  "bonus": 2,
+  "ingredient": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670521972747"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670521972747"
     }
   },
   "__v": 0

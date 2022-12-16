@@ -1,37 +1,5 @@
 [{
   "_id": {
-    "$oid": "638c81e66ceacde1d8bc35ac"
-  },
-  "email": "thanhf315@gmail.com",
-  "phoneNumber": "0000000001",
-  "password": "$2a$08$PWJyjlDkipxkGNXhWoi2v.7/0iXkNRgWIJrfCrNgBzwPbPmXhSA6S",
-  "role": "user",
-  "salary": 0,
-  "payroll": 0,
-  "isVerify": true,
-  "tokens": [
-    {
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzhjODFlNjZjZWFjZGUxZDhiYzM1YWMiLCJpYXQiOjE2NzAxNTI2Nzh9.PTzS5Lkrh6wNCm61oMQMl3VZZsYQgOC6OlCC3AZLuLc",
-      "_id": {
-        "$oid": "638c81e66ceacde1d8bc35ae"
-      }
-    }
-  ],
-  "createdAt": {
-    "$date": {
-      "$numberLong": "1670152678934"
-    }
-  },
-  "updatedAt": {
-    "$date": {
-      "$numberLong": "1670157076827"
-    }
-  },
-  "__v": 3,
-  "confirmationCode": 673776,
-  "name": "Nguyễn Thị Mai"
-},{
-  "_id": {
     "$oid": "638c8bef8f6daaa0c049c57c"
   },
   "name": "Nguyễn Thành",
@@ -41,9 +9,16 @@
   "address": "Thanh Hóa",
   "role": "employee",
   "salary": 0,
-  "payroll": 0,
+  "payroll": 84000,
   "isVerify": true,
-  "tokens": [],
+  "tokens": [
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzhjOGJlZjhmNmRhYWEwYzA0OWM1N2MiLCJpYXQiOjE2NzAzNDMyMzh9.-MA6SH_i19v9uOuo9xa2bl-il_jCZ5exxnXmzBoist4",
+      "_id": {
+        "$oid": "638f6a462c123348fea10a88"
+      }
+    }
+  ],
   "createdAt": {
     "$date": {
       "$numberLong": "1670155247499"
@@ -51,10 +26,10 @@
   },
   "updatedAt": {
     "$date": {
-      "$numberLong": "1670155818467"
+      "$numberLong": "1671044197856"
     }
   },
-  "__v": 3,
+  "__v": 4,
   "confirmationCode": 666838
 },{
   "_id": {
@@ -107,4 +82,171 @@
   },
   "__v": 4,
   "confirmationCode": 666838
+},{
+  "_id": {
+    "$oid": "6390b8c911e3e7f7ca4d39b5"
+  },
+  "email": "nmthanhf@outlook.com",
+  "password": "$2a$08$QWNih7psIys2xX7OvgsjceRGKmGjXEj6Yn26.wa/R.bxgQV9ugh0y",
+  "role": "user",
+  "salary": 10000000,
+  "payroll": 0,
+  "isVerify": true,
+  "tokens": [
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzkwYjhjOTExZTNlN2Y3Y2E0ZDM5YjUiLCJpYXQiOjE2NzA0Mjg4NzN9.Hqbuc9cQRJ8sfU9F6ixaP4IuMeneD0wQgi4NrjGDoBQ",
+      "_id": {
+        "$oid": "6390b8c911e3e7f7ca4d39b7"
+      }
+    },
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzkwYjhjOTExZTNlN2Y3Y2E0ZDM5YjUiLCJpYXQiOjE2NzA0Mjg5Nzh9.Vqlc1Nq596zvayHe08PLCyM1hoy8Y76cbqBBHzPGf1o",
+      "_id": {
+        "$oid": "6390b93211e3e7f7ca4d39bb"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670428873147"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670428978503"
+    }
+  },
+  "__v": 2,
+  "confirmationCode": 304492
+},{
+  "_id": {
+    "$oid": "639218ae2bf8380d07e9ca8e"
+  },
+  "name": "Mai Mai",
+  "email": "thanhf315@gmail.com",
+  "password": "$2a$08$s2fELBRSbi80BzwOhtljseMF449kLkXhY9X/4YFzshoQ2vi473GgG",
+  "role": "user",
+  "salary": 10000000,
+  "payroll": 0,
+  "isVerify": true,
+  "tokens": [
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzkyMThhZTJiZjgzODBkMDdlOWNhOGUiLCJpYXQiOjE2NzA1MTg5NTh9.jXd7pzVw7lxhcWa4nsSAejQGM9BDpB3nKEnM0enOjsM",
+      "_id": {
+        "$oid": "639218ae2bf8380d07e9ca90"
+      }
+    },
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzkyMThhZTJiZjgzODBkMDdlOWNhOGUiLCJpYXQiOjE2NzA3NTI3ODd9.416nOLkQrNw98PRUTCAnhdUILmMA3zYGTlj3RS6xfCA",
+      "_id": {
+        "$oid": "6395aa13c10cdf613fd6c02d"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670518958425"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670752788011"
+    }
+  },
+  "__v": 4,
+  "confirmationCode": 696205,
+  "phoneNumber": "0000000001"
+},{
+  "_id": {
+    "$oid": "63989f42389f5447c2cf77f2"
+  },
+  "name": "Phi Hổ",
+  "email": "phiho@gmail.com",
+  "address": "Xa lắm",
+  "role": "user",
+  "salary": 10000000,
+  "payroll": 0,
+  "isVerify": true,
+  "tokens": [
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk4OWY0MjM4OWY1NDQ3YzJjZjc3ZjIiLCJpYXQiOjE2NzA5NDY2MjZ9.C4YD9DPHPjBFqSWWT1aYtSrBUnhbHBTofGYPdEgXDnw",
+      "_id": {
+        "$oid": "63989f42389f5447c2cf77f3"
+      }
+    }
+  ],
+  "confirmationCode": 675266,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670946626090"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670946626090"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63989fdf638680b30aaea2de"
+  },
+  "name": "Phi Hổ",
+  "email": "phiho123@gmail.com",
+  "address": "Xa lắm",
+  "role": "employee",
+  "salary": 10000000,
+  "payroll": 0,
+  "isVerify": true,
+  "tokens": [
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk4OWZkZjYzODY4MGIzMGFhZWEyZGUiLCJpYXQiOjE2NzA5NDY3ODN9.Jh6zjXDmk94a11sC2bs0ZIklKRPLal_xVFFZpRwTG-M",
+      "_id": {
+        "$oid": "63989fdf638680b30aaea2df"
+      }
+    }
+  ],
+  "password": "$2a$08$Q0yH.CpxP4vy5QVcrK/5KOxaP4jPmtEM4P0RwXAcIh4fTCK/s2XR6",
+  "confirmationCode": 445540,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670946783156"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670946783156"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "639a19046d3681f48d3262f0"
+  },
+  "email": "phoiejh@gmail.com",
+  "password": "$2a$08$toDZEQTbd30IJAyfCsk6luWmZxlklbbf5YVAorK0WEJqAYJHl8B02",
+  "role": "user",
+  "salary": 10000000,
+  "payroll": 0,
+  "isVerify": false,
+  "tokens": [
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzlhMTkwNDZkMzY4MWY0OGQzMjYyZjAiLCJpYXQiOjE2NzEwNDMzMzJ9.zt6lTjNojWC-Ax0emLQ3vh1ptzU0sMDOzSOL0ytrpw0",
+      "_id": {
+        "$oid": "639a19046d3681f48d3262f2"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1671043332436"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1671043335651"
+    }
+  },
+  "__v": 1,
+  "confirmationCode": 486318
 }]
