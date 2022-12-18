@@ -7,8 +7,8 @@ const router = express.Router()
 router.post('/addProduct', auth.isAdmin ,multer.upload.array('files', 4), AdminController.createProduct)
 router.post('/addTreatment',  auth.isAdmin, multer.upload.array('files', 4), AdminController.createTreatment)
 
-router.post('/updateProduct', auth.isAdmin ,multer.upload.array('files', 4), AdminController.updateProduct)
-router.post('/updateTreatment',  auth.isAdmin, multer.upload.array('files', 4), AdminController.updateTreatment)
+router.post('/updateProduct/:id', auth.isAdmin ,multer.upload.array('files', 4), AdminController.updateProduct)
+router.post('/updateTreatment/:id',  auth.isAdmin, multer.upload.array('files', 4), AdminController.updateTreatment)
 
 router.post('/deleteProduct/:id', auth.isAdmin, AdminController.deleteProduct)
 router.post('/deleteTreatment/:id', auth.isAdmin, AdminController.deleteTreatment)
