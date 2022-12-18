@@ -35,7 +35,7 @@ router.delete('/:id/delete', auth.isEmployee, appointmentController.delete)
 router.post('/finish/:id', auth.isEmployee, appointmentController.finish)
 
 
-//Nhân viên đặt cho khách hàng dựa vào email (tạm thời admin có thể thêm r nên để sau đã)
-
+//Nhân viên đặt cho khách hàng dựa vào email
+router.post('/add', auth.isEmployee, appointmentController.addAppointment)
 
 module.exports = router

@@ -168,6 +168,60 @@ class AppointmentController {
         }
     }
 
+
+    async addAppointment(req, res, next) {
+        try {
+            const now = new Date()
+            const dayOfWeek = Number.parseInt(req.body.dayOfWeek)
+            const days = (7 - now.getDay() + dayOfWeek)
+            const date = new Date(
+                now.getFullYear(),
+                now.getMonth(),
+                now.getDate()
+                + days
+            )
+            if (date < new Date()) {
+                date.setDate(date.getDate() + 7)
+            }
+            req.body.date = date
+            //Tính thời gian bắt đầu và kết thúc
+            //Lưu trong dữ liệu vd:"2022-12-12T04:50:00.329Z"
+            var StartTime = String(req.body.StartTime)
+
+            var hours = parseInt(StartTime.slice(0, 2))
+            var minutes = parseInt(StartTime.slice(3))
+            StartTime = new Date(date.setHours(hours, minutes, 0))
+            const treatment = await Treatment.findById(req.body.Treatment_id);
+            req.body.treatment = treatment
+            var time = Number.parseInt(treatment.duration);
+
+            var EndTime = new Date(StartTime.getTime() + time * 60 * 1000);
+            req.body.StartTime = StartTime
+            req.body.EndTime = EndTime
+
+            //Lấy ra thông tin khách hàng khách hàng
+            const user = await User.findOne({ email: req.body.email })
+            req.body.Customer = user.name
+
+            //Check xem lịch có bị trùng khi đặt cùng một nhân viên hay không
+            var count = await Appointment.find({ technician_id: req.technician_id, StartTime: { $gte: StartTime, $lt: EndTime } }).count()
+            if (count == 0) {
+                count = await Appointment.find({ technician_id: req.technician_id, EndTime: { $gte: StartTime, $lt: EndTime } }).count()
+            }
+            if (count != 0) {
+                return res.status(400).json({ error: 'Nhân viên đang bận trong khoảng thời gian này, mời đặt lịch vào thời gian khác hoặc với nhân viên khác' })
+            }
+            const appointment = new Appointment(req.body)
+            appointment.save()
+            return res.send({ appointment })
+        } catch (error) {
+            console.log(error)
+            return res.json({ message: error.message })
+        }
+
+    }
+
+
 }
 
 module.exports = new AppointmentController
