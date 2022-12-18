@@ -11,6 +11,7 @@ const Order = require('../models/Order')
 const { Buffer } = require('buffer')
 const { errorMonitor } = require('events')
 const ProductController = require('./ProductController')
+const Product = require('../models/Product')
 class AdminController {
 
     async createProduct(req, res, next) {
@@ -319,6 +320,31 @@ class AdminController {
         } catch (error) {
             console.log(error)
             return res.json({ message: error.message })
+        }
+    }
+
+
+    async updateProduct(req, res, next) {
+        const id = req.params.id
+        try {
+            await Product.updateOne({_id: id}, req.body)
+            const product = await Product.findById(id)
+            return res.send({product})
+        } catch (error) {
+            console.log(error)
+            return res.json({message: 'Cập nhật thông tin sản phẩm không thành công'})
+        }
+    }
+
+    async updateTreatment(req, res, next) {
+        const id = req.params.id
+        try {
+            await Treatment.updateOne({_id: id}, req.body)
+            const treatment = await Treatment.findById(id)
+            return res.send({treatment})
+        } catch (error) {
+            console.log(error)
+            return res.json({message: 'Cập nhật thông tin liệu trình không thành công'})
         }
     }
 }

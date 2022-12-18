@@ -127,7 +127,6 @@ class AppointmentController {
     }
 
     //Sửa thông tin đặt lịch
-    // PATCH /appointment/:id/employeeEdit
     async employeeEdit(req, res, next) {
         const _id = req.params.id
         try {
