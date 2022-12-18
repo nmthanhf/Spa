@@ -4,6 +4,7 @@ const employeeRouter = require('./employee')
 const appointmentRouter = require('./appointment')
 const productRouer = require('./product')
 const cartRouter = require('./cart')
+const treatmentRouter = require('./treatment')
 function route(app) {
   //Quản lý người dùng
   app.use('/user', userRouter)
@@ -17,6 +18,8 @@ function route(app) {
   app.use('/product', productRouer)
 
   app.use ('/cart', cartRouter)
+
+  app.use('/treatment', treatmentRouter)
 }
 
 module.exports = route
