@@ -33,14 +33,30 @@ router.post('/deleteAccount', auth.isAdmin, AdminController.deleteAccount)
 //Đặt lịch cho người dùng theo email
 router.post('/addAppointment', auth.isAdmin, AdminController.addAppointment)
 
+//Sửa thông tin đặt lịch
+router.post('/updateAppointment/:id', auth.isAdmin, AdminController.updateAppointment)
+
 //Đánh dấu đặt lịch đẫ hoàn thành và thêm hoa hồng cho nhân viên
 router.post('/finishAppointment/:id', auth.isAdmin, AdminController.finishAppointment)
+
+//Xoá đặt lịch 
+router.post('/deleteAppointment/:id', auth.isAdmin, AdminController.deleteAppointment)
 
 //Sửa thông tin nv, kh
 router.put('/editAccount/:id', auth.isAdmin, AdminController.editAccount)
 
 //tạo đơn hàng
-//Nhận vào một ds sản phẩm
+//Nhận vào một ds sản phẩm products
+// products: [
+//     {
+//         productId:
+//         amout:
+//     }, 
+//     {
+//         productId
+//         amount:
+//     }
+// ]
 router.post('/order', auth.isAdmin, AdminController.order)
 
 //--báo cáo---

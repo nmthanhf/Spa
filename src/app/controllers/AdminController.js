@@ -346,6 +346,28 @@ class AdminController {
             return res.json({message: 'Cập nhật thông tin liệu trình không thành công'})
         }
     }
+
+
+    async updateAppointment(req, res, next) {
+        const _id = req.params.id
+        try {
+            await Appointment.updateOne({ _id: _id }, req.body)
+            const appointment = await Appointment.findById(_id)
+            return res.send(appointment)
+        } catch (error) {
+            return res.json({ error: 'Cập nhật thông tin lịch hẹn không thành công' })
+        }
+    }
+
+    async deleteAppointment(req, res, next) {
+        try {
+        await Appointment.deleteOne({ _id: req.params.id })
+        return res.json({message: 'Xoá đặt lịch thành công'})
+        } catch (error) {
+            console.log(error)
+            return res.json({message: 'Xoá đặt lịch thất bại'})
+        }
+    }
 }
 
 module.exports = new AdminController
