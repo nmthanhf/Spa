@@ -11,7 +11,6 @@ const Order = require('../models/Order')
 const { Buffer } = require('buffer')
 const { errorMonitor } = require('events')
 const ProductController = require('./ProductController')
-const Product = require('../models/Product')
 class AdminController {
 
     async createProduct(req, res, next) {
