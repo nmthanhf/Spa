@@ -66,9 +66,6 @@ const treatmentSchema = mongoose.Schema({
     ingredient: {
         type: Array
     },
-    startDate: {
-        type: String
-    },
     bonus: {
         type:Number,
         required: [true, 'Cần có hoa hồng khi hoàn thành']

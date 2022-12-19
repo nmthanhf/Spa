@@ -79,6 +79,18 @@ class CartController {
         }
     }
 
+    async view(req, res, next) { 
+        try {
+        let cart = Cart.findOne({Customer_id: req.user._id})
+        if(!cart) {
+            cart = new Cart({Customer_id: req.user._id})   
+        }
+        return res.send({cart})
+        } catch (error) {
+            return res.json({message: error.message})
+        }
+
+    }
 
 }
 
