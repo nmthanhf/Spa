@@ -5,6 +5,7 @@ const appointmentRouter = require('./appointment')
 const productRouer = require('./product')
 const cartRouter = require('./cart')
 const treatmentRouter = require('./treatment')
+const homeRouter = require('./home')
 function route(app) {
   //Quản lý người dùng
   app.use('/user', userRouter)
@@ -20,6 +21,8 @@ function route(app) {
   app.use ('/cart', cartRouter)
 
   app.use('/treatment', treatmentRouter)
+
+  app.use('/home', homeRouter)
 }
 
 module.exports = route
